@@ -32,5 +32,8 @@
   },
   "blog/facebook/facebook.qmd": {
     "facebook.html": "ffed31a7"
+  },
+  "blog/Theranos/theranos.qmd": {
+    "theranos.html": "5bbe43aa"
   }
 }

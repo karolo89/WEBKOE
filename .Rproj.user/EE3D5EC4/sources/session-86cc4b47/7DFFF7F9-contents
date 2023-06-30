@@ -3,19 +3,36 @@ project:
   output-dir: docs
 
 website:
-  title: "Karol Orozco"
+  open-graph: true
+  title: "Karol M. Orozco"
   navbar:
+    right:
+      - text: "About Me"
+        file: index.qmd
+      - text: "Projects"
+        file: projects.qmd
+      - text: "Professional Summary"
+        file: resume.qmd
+      
+  page-footer:
     left:
-      - href: index.qmd
-        text: Home
-      - href: projects.qmd
-        text: Projects
-
+      - href: https://www.quarto.org
+        text: Made with quarto®
+    right: 
+      - icon: linkedin
+        href: https://www.linkedin.com/in/karolorozcoe/
+      - icon: github
+        href: https://github.com/karolo89
+      - icon: envelope-fill
+        href: mailto:karol.marianoe@gmail.com
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: true
+    citations-hover: true
+    footnotes-hover: true
+    theme: 
+      light: LightTheme.css
+      dark: DarkTheme.scss
 
 editor: visual
+
 

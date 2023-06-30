@@ -22,5 +22,9 @@
   },
   "portfolio.qmd": {
     "portfolio.html": "e267e800"
+  },
+  "resume.qmd": {
+    "resume.tex": "45d113ed",
+    "resume.html": "865153bc"
   }
 }

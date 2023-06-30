@@ -1,0 +1,4 @@
+[2,"\n"]
+[1,"pandoc \n  to: html\n  output-file: projects.html\n  standalone: true\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  \nmetadata\n  document-css: false\n  link-citations: true\n  date-format: long\n  lang: en\n  title: Projects\n  listing:\n    contents: post\n    sort: date desc\n    type: default\n    date-format: long\n    fields:\n      - image\n      - date\n      - title\n      - author\n      - description\n      - categories\n      - reading-time\n    categories: unnumbered\n    max-description-length: 175\n    sort-ui: false\n    filter-ui: false\n  title-block-banner: true\n  page-layout: article\n  \n"]
+[1,"Output created: projects.html\n\nWatching files for changes\n"]
+[1,"Browse at http://localhost:4967/\n"]

@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resume.qmd">
+    <a class="nav-link" href="./resume.html">
  <span class="menu-text">Professional Summary</span></a>
   </li>  
 </ul>
@@ -161,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="Data Journalism">Data Journalism</div><div class="category" data-category="R">R</div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -174,7 +174,44 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Data Journalism,R" data-listing-file-modified-sort="1688105159665" data-listing-reading-time-sort="14.01">
+<div class="thumbnail">
+<p><a href="./projects/facebook/facebook.html"> <img src="./projects/facebook/fb_icon" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./projects/facebook/facebook.html">
+<h3 class="no-anchor listing-title">
+Facebook’s Algorithmic Pandora’s Box: Unmasking the Amplification of Fake News and Political Polarization
+</h3>
+<div class="listing-subtitle">
 
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data Journalism'); return false;">
+Data Journalism
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+</div>
+<a href="./projects/facebook/facebook.html">
+<div class="listing-description">
+As we integrate social media into our daily routines, we must consider the potential impact on the spread of information. Facebook’s algorithm is intended to personalize…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./projects/facebook/facebook.html">
+<div class="listing-author">
+Orozco Karol M.
+</div>
+<div class="listing-reading-time">
+14 min
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items

@@ -26,5 +26,8 @@
   "resume.qmd": {
     "resume.tex": "45d113ed",
     "resume.html": "865153bc"
+  },
+  "projects/facebook/facebook.qmd": {
+    "facebook.html": "73c996d0"
   }
 }

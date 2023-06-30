@@ -5,6 +5,8 @@
   },
   {
     "listing": "/portfolio.html",
-    "items": []
+    "items": [
+      "/projects/facebook/facebook.html"
+    ]
   }
 ]

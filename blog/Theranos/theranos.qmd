@@ -21,11 +21,11 @@ The healthcare industry was subject to technological advancements and the introd
 
 These organizations were also affected by socio-economic factors that influenced health disparities and people's spending behavior. Factors such as inflation, unemployment, interest rates, salary inequality, age, marital status, food and housing security, and poverty rates played significant roles. Individuals facing unemployment were less likely to afford medical costs, including emergency visits or routine lab tests. Consequently, the price of services or products often served as a critical factor when selecting a healthcare provider.
 
-### ANALYSIS
+### Analysis
 
 To analyze Theranos, I will employ the Nadler-Tushman Congruence Model, which offers a comprehensive framework for evaluating the organization's performance. This model considers essential elements including strategy, critical tasks, structure and processes, people, and culture. By examining these interconnected aspects, we can gain a holistic understanding of the company's operations and their alignment.
 
-\![Nadler-Tushman Congruence Model\](congruence.jpg)
+![Nadler-Tushman Congruence Model](congruence.jpg)
 
 #### Strategy:
 

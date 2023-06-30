@@ -4,5 +4,11 @@
   },
   "index.qmd": {
     "index.html": "50cb8d26"
+  },
+  "posts/post-with-code/index.qmd": {
+    "index.html": "de189cdb"
+  },
+  "posts/welcome/index.qmd": {
+    "index.html": "dfd897d2"
   }
 }

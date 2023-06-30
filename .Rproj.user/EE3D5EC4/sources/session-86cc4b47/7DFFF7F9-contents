@@ -10,7 +10,7 @@ website:
       - text: "About Me"
         file: index.qmd
       - text: "Projects"
-        file: projects.qmd
+        file: portfolio.qmd
       - text: "Blog"
         file: blog.qmd        
       - text: "Professional Summary"

@@ -19,5 +19,8 @@
   },
   "blog.qmd": {
     "blog.html": "d159ab85"
+  },
+  "portfolio.qmd": {
+    "portfolio.html": "e267e800"
   }
 }

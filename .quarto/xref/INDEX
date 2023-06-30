@@ -29,5 +29,8 @@
   },
   "projects/facebook/facebook.qmd": {
     "facebook.html": "73c996d0"
+  },
+  "blog/facebook/facebook.qmd": {
+    "facebook.html": "ffed31a7"
   }
 }

@@ -1,12 +1,12 @@
 [
   {
     "listing": "/blog.html",
-    "items": []
+    "items": [
+      "/blog/facebook/facebook.html"
+    ]
   },
   {
     "listing": "/portfolio.html",
-    "items": [
-      "/projects/facebook/facebook.html"
-    ]
+    "items": []
   }
 ]

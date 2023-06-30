@@ -1,14 +1,14 @@
 {
-    "id": "295F8B4A",
+    "id": "23216D7A",
     "path": "C:/Users/karol/Desktop/Projects/WEBKOE/projects.qmd",
     "project_path": "projects.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "610070096",
     "contents": "",
     "dirty": false,
-    "created": 1688097343234.0,
-    "source_on_save": true,
-    "relative_order": 3,
+    "created": 1688101184641.0,
+    "source_on_save": false,
+    "relative_order": 6,
     "properties": {
         "rmdVisualMode": "false",
         "rmdVisualWrapConfigured": "true",
@@ -21,11 +21,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688099922,
+    "lastKnownWriteTime": 1688101205,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688099922722,
+    "last_content_update": 1688101205797,
     "read_only": false,
     "read_only_alternatives": []
 }

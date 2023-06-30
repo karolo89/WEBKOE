@@ -3,7 +3,7 @@
     "path": "C:/Users/karol/Desktop/Projects/WEBKOE/projects.qmd",
     "project_path": "projects.qmd",
     "type": "quarto_markdown",
-    "hash": "610070096",
+    "hash": "4235329422",
     "contents": "",
     "dirty": false,
     "created": 1688101184641.0,
@@ -17,15 +17,15 @@
         "docOutlineVisible": "0",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "2:0",
-        "cursorPosition": "16,3",
+        "cursorPosition": "15,24",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688101205,
+    "lastKnownWriteTime": 1688101475,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688101205797,
+    "last_content_update": 1688101475263,
     "read_only": false,
     "read_only_alternatives": []
 }

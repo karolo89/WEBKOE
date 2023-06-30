@@ -11,6 +11,8 @@ website:
         file: index.qmd
       - text: "Projects"
         file: projects.qmd
+      - text: "Blog"
+        file: blog.qmd        
       - text: "Professional Summary"
         file: resume.qmd
       

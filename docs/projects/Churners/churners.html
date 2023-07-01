@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Orozco Karol M.">
+<meta name="dcterms.date" content="2023-03-11">
 
 <title>Karol M. Orozco - Customer Churn Prediction</title>
 <style>
@@ -127,12 +128,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <meta property="og:title" content="Karol M. Orozco - Customer Churn Prediction">
-<meta property="og:description" content="This report presents an analysis of bank customer churn. The dataset contains various attributes of bank customers, and the goal is to predict whether a customer is likely to churn or not.">
-<meta property="og:image" content="theranos.jpg">
+<meta property="og:description" content="This report presents an analysis of bank customer churn using a dataset containing various attributes of bank customers. The goal is to predict whether a customer is likely to churn or not.">
+<meta property="og:image" content="churn.jpg">
 <meta property="og:site-name" content="Karol M. Orozco">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -176,11 +177,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Customer Churn Prediction</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Data Journalism</div>
                 <div class="quarto-category">R</div>
+                <div class="quarto-category">Machine Learning</div>
+                <div class="quarto-category">Prediction</div>
               </div>
                   </div>
   </div>
@@ -195,33 +197,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             </div>
     </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 11, 2023</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction:</a></li>
+  <li><a href="#approach-and-methodology" id="toc-approach-and-methodology" class="nav-link" data-scroll-target="#approach-and-methodology">Approach and Methodology</a></li>
+  <li><a href="#data-summary" id="toc-data-summary" class="nav-link" data-scroll-target="#data-summary">Data Summary:</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration:</a></li>
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca">Principal Component Analysis (PCA):</a></li>
+  <li><a href="#random-forest-model" id="toc-random-forest-model" class="nav-link" data-scroll-target="#random-forest-model">Random Forest Model</a></li>
+  <li><a href="#combining-prc-variables-with-top-columns" id="toc-combining-prc-variables-with-top-columns" class="nav-link" data-scroll-target="#combining-prc-variables-with-top-columns">Combining PRC variables with top columns</a></li>
+  <li><a href="#knn-model" id="toc-knn-model" class="nav-link" data-scroll-target="#knn-model">KNN Model</a></li>
+  <li><a href="#downsampling-bank-data-to-remove-imbalance-of-yesno-churn" id="toc-downsampling-bank-data-to-remove-imbalance-of-yesno-churn" class="nav-link" data-scroll-target="#downsampling-bank-data-to-remove-imbalance-of-yesno-churn">Downsampling bank data to remove imbalance of yes/no churn:</a></li>
+  <li><a href="#random-forest-model-with-downsampling" id="toc-random-forest-model-with-downsampling" class="nav-link" data-scroll-target="#random-forest-model-with-downsampling">Random Forest Model with downsampling</a></li>
+  <li><a href="#gradient-boosted-model-with-pca-vs-only-top-5-variables" id="toc-gradient-boosted-model-with-pca-vs-only-top-5-variables" class="nav-link" data-scroll-target="#gradient-boosted-model-with-pca-vs-only-top-5-variables">Gradient boosted model with PCA vs only top 5 variables:</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
-<p>This report presents an analysis of bank customer churn. The dataset contains various attributes of bank customers, and the goal is to predict whether a customer is likely to churn or not.</p>
-<p><strong>Task:</strong> Create a model that predicts churns of bank customers using only 5 features.</p>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction:</h2>
+<p>This report presents an analysis of bank customer churn using a dataset containing various attributes of bank customers. The goal is to predict whether a customer is likely to churn or not. The dataset consists of 10,127 rows and 20 columns, including both numeric and character variables. The objective is to create a model that predicts customer churn using only five features.</p>
+</section>
+<section id="approach-and-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="approach-and-methodology">Approach and Methodology</h2>
+<p>The methodology employed in predicting bank churners consisted of several steps. Initially, the necessary R packages were loaded, including tidyverse, caret, pROC, MLmetrics, fastDummies, and skimr, to facilitate the analysis. The bank dataset, obtained from an external source, was imported and assigned to the “bank” variable.</p>
+<p>An Exploratory Data Analysis (EDA) was conducted using the skim function, which provided summary statistics and distributions of the data. Visualizations, including histograms and scatter plots, were created to explore the relationships between variables and the churn outcome.</p>
+<p>Principal Component Analysis (PCA) was employed using the prcomp function after preprocessing the data through scaling and centering. The summary function offered insights into the results of PCA, and the screeplot visually displayed the variance explained by each principal component. The top five principal components were extracted, and their loadings were examined.</p>
+<p>To determine variable importance, a Random Forest model was trained on the entire dataset using the train function from the caret package. The varImp function was used to calculate the importance of variables, and a plot was generated to visualize their significance.</p>
+<p>The top two principal components, “young_spenders” and “old_spenders,” were selected, along with the top five variables from the dataset. These features were combined to create a new dataset called “banksy.”</p>
+<p>A K-Nearest Neighbors (KNN) model was trained on the banksy dataset using the train function, with the tuning parameter “k” determined through cross-validation. The model’s performance was evaluated using a confusion matrix and the receiver operating characteristic (ROC) curve.</p>
+<p>To address the class imbalance between churn and non-churn instances, downsampling was performed on the training dataset. The downSample function from the caret package was utilized for this purpose.</p>
+<p>Another Random Forest model was then trained on the downsampled training dataset, and its performance was evaluated using a confusion matrix and the ROC curve.</p>
+<p>Two gradient boosted models were trained: one using the original dataset with PCA variables, and the other using only the top five variables. Confusion matrices and ROC curves were utilized to evaluate the performance of both models.</p>
+<p>Finally, the best-performing model, fit_gbm2, was selected based on evaluation metrics and its optimal hyperparameters were printed.</p>
+<p>In conclusion, the methodology involved various stages, including data preprocessing, exploratory analysis, dimensionality reduction using PCA, variable importance analysis with Random Forest, training and evaluating models such as KNN, Random Forest, and Gradient Boosted models, and ultimately selecting the best-performing model based on evaluation metrics.</p>
+<section id="load-the-required-packages" class="level4">
+<h4 class="anchored" data-anchor-id="load-the-required-packages">Load the required packages</h4>
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">"https://github.com/karolo89/Raw_Data/raw/main/BankChurners.rds"</span>)))  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">rename_all</span>(<span class="fu">funs</span>(<span class="fu">tolower</span>(.))) </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(bank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastDummies)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="data-summary" class="level2">
+<h2 class="anchored" data-anchor-id="data-summary">Data Summary:</h2>
+<p>The dataset contains six character variables and 14 numeric variables. The character variables include gender, education level, marital status, income category, card category, and churn (the target variable). The numeric variables include customer age, dependent count, months on book, total relationship count, months inactive in the last 12 months, contacts count in the last 12 months, credit limit, total revolving balance, average open-to-buy, total amount change from Q4 to Q1, total transaction amount, total transaction count, total count change from Q4 to Q1, and average utilization ratio.</p>
+</section>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data Exploration:</h2>
+<p>The numeric variables have been analyzed using summary statistics. The mean age of bank customers is 46.33 years, with a standard deviation of 8.02. The age ranges from 26 to 73 years. The dependent count ranges from 0 to 5, with an average of 2.35. The months on book range from 13 to 56, with an average of 35.93. The total relationship count ranges from 1 to 6, with an average of 3.81. The months inactive in the last 12 months range from 0 to 6, with an average of 2.34. The contacts count in the last 12 months ranges from 0 to 6, with an average of 2.46. The credit limit ranges from 1,438.3 to 34,516, with an average of 8,631.95. The total revolving balance ranges from 0 to 2,517, with an average of 1,162.81. The average open-to-buy ranges from 3 to 34,516, with an average of 7,469.14. The total amount change from Q4 to Q1 ranges from 0 to 3.4, with an average of 0.76. The total transaction amount ranges from 510 to 18,484, with an average of 4,404.09. The total transaction count ranges from 10 to 139, with an average of 64.86. The total count change from Q4 to Q1 ranges from 0 to 3.71, with an average of 0.71. The average utilization ratio ranges from 0 to 1, with an average of 0.27.</p>
+<div class="cell">
+<details>
+<summary>Behind the Scenes</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">"https://github.com/karolo89/Raw_Data/raw/main/BankChurners.rds"</span>)))  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">rename_all</span>(<span class="fu">funs</span>(<span class="fu">tolower</span>(.))) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(bank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
@@ -570,24 +630,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> <span class="fu">as.factor</span>(churn))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>churn) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> <span class="fu">as.factor</span>(churn))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>churn) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="pca-on-bank-data" class="level2">
-<h2 class="anchored" data-anchor-id="pca-on-bank-data">PCA on bank data</h2>
+<section id="principal-component-analysis-pca" class="level2">
+<h2 class="anchored" data-anchor-id="principal-component-analysis-pca">Principal Component Analysis (PCA):</h2>
+<p>Principal Component Analysis (PCA) was performed on the dataset to identify the most influential components. The scree plot revealed that the first [number] principal components explain a significant portion of the variance in the data. Based on the component loadings, the “young spenders” and “old spenders” components appear to be the most predictive of churn.</p>
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> <span class="fu">as.factor</span>(churn))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bank2 <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>churn) <span class="sc">%&gt;%</span> <span class="fu">dummy_cols</span>(<span class="at">remove_selected_columns =</span> T)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>bank3 <span class="ot">=</span> <span class="fu">cbind</span>(bank2, <span class="fu">select</span>(bank,churn))</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>pr_bank <span class="ot">=</span> <span class="fu">prcomp</span>(<span class="at">x =</span> <span class="fu">select</span>(bank3,<span class="sc">-</span>churn), <span class="at">scale =</span> T, <span class="at">center =</span> T)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr_bank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> <span class="fu">as.factor</span>(churn))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bank2 <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>churn) <span class="sc">%&gt;%</span> <span class="fu">dummy_cols</span>(<span class="at">remove_selected_columns =</span> T)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bank3 <span class="ot">=</span> <span class="fu">cbind</span>(bank2, <span class="fu">select</span>(bank,churn))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>pr_bank <span class="ot">=</span> <span class="fu">prcomp</span>(<span class="at">x =</span> <span class="fu">select</span>(bank3,<span class="sc">-</span>churn), <span class="at">scale =</span> T, <span class="at">center =</span> T)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr_bank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
@@ -618,14 +679,14 @@ Cumulative Proportion  1.000e+00 1.000e+00 1.000e+00</code></pre>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pr_bank, <span class="at">type =</span> <span class="st">"lines"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pr_bank, <span class="at">type =</span> <span class="st">"lines"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="churners_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pr_bank<span class="sc">$</span>rotation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pr_bank<span class="sc">$</span>rotation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                  PC1         PC2        PC3         PC4
@@ -703,9 +764,9 @@ contacts_count_12_mon    -1.440254e-17 -1.028874e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames_to_column</span>(<span class="fu">as.data.frame</span>(pr_bank<span class="sc">$</span>rotation)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">abs</span>(PC1) <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">|</span> <span class="fu">abs</span>(PC2) <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">|</span> <span class="fu">abs</span>(PC3) <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">|</span> <span class="fu">abs</span>(PC4) <span class="sc">&gt;=</span> <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames_to_column</span>(<span class="fu">as.data.frame</span>(pr_bank<span class="sc">$</span>rotation)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">abs</span>(PC1) <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">|</span> <span class="fu">abs</span>(PC2) <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">|</span> <span class="fu">abs</span>(PC3) <span class="sc">&gt;=</span> <span class="fl">0.3</span> <span class="sc">|</span> <span class="fu">abs</span>(PC4) <span class="sc">&gt;=</span> <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  rowname          PC1         PC2         PC3          PC4
@@ -724,51 +785,74 @@ contacts_count_12_mon    -1.440254e-17 -1.028874e-16</code></pre>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">=</span> <span class="fu">bind_cols</span>(<span class="fu">select</span>(bank3, churn), <span class="fu">as.data.frame</span>(pr_bank<span class="sc">$</span>x)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">"rich_men"</span> <span class="ot">=</span> PC1, <span class="st">"cheap_men"</span> <span class="ot">=</span> PC2, <span class="st">"young_spenders"</span> <span class="ot">=</span> PC3, <span class="st">"old_spenders"</span><span class="ot">=</span> PC4)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#based on the graph below, "young spenders" and "old spenders" seem to be the most predictive of whether the customer will churn. </span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>prc <span class="sc">%&gt;%</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>churn, <span class="at">names_to =</span> <span class="st">"component"</span>, <span class="at">values_to =</span> <span class="st">"loading"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> <span class="fu">as.factor</span>(churn)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(loading, <span class="at">fill=</span>churn)) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_grid</span>(.<span class="sc">~</span>component)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="random-forest-model-with-all-variables-on-entire-ds-then-plotting-importance-of-variables-to-see-most-impactful" class="level2">
-<h2 class="anchored" data-anchor-id="random-forest-model-with-all-variables-on-entire-ds-then-plotting-importance-of-variables-to-see-most-impactful">Random Forest model with all variables on entire ds, then plotting importance of variables to see most impactful:</h2>
-<div class="cell">
-<details>
-<summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">3</span>, <span class="at">classProbs=</span><span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> twoClassSummary)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>bank_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(bank<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> bank[ bank_index, ]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> bank[<span class="sc">-</span>bank_index, ]</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">=</span> <span class="fu">bind_cols</span>(<span class="fu">select</span>(bank3, churn), <span class="fu">as.data.frame</span>(pr_bank<span class="sc">$</span>x)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">"rich_men"</span> <span class="ot">=</span> PC1, <span class="st">"cheap_men"</span> <span class="ot">=</span> PC2, <span class="st">"young_spenders"</span> <span class="ot">=</span> PC3, <span class="st">"old_spenders"</span><span class="ot">=</span> PC4)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#based on the graph below, "young spenders" and "old spenders" seem to be the most predictive of whether the customer will churn. </span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>big_model <span class="ot">=</span><span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"rf"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">tunelength =</span> <span class="dv">4</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data to long format</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> prc <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>churn, <span class="at">names_to =</span> <span class="st">"component"</span>, <span class="at">values_to =</span> <span class="st">"loading"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert churn to a factor variable</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>churn <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_long<span class="sc">$</span>churn)</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>importance <span class="ot">=</span> <span class="fu">varImp</span>(big_model)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(importance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Define custom colors</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>custom_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>) <span class="co"># Replace with your preferred colors</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the density distribution with improved theme</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(loading, <span class="at">fill =</span> churn)) <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> component) <span class="sc">+</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>  <span class="co"># Set the overall theme to minimal</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density Distribution of Loading"</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Loading"</span>, <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span>  <span class="co"># Modify axis labels and title</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> custom_colors) <span class="sc">+</span>  <span class="co"># Use custom colors</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),  <span class="co"># Adjust title appearance</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust axis text size</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),  <span class="co"># Hide legend title</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>)  <span class="co"># Position legend at the bottom</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="churners_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+</section>
+<section id="random-forest-model" class="level2">
+<h2 class="anchored" data-anchor-id="random-forest-model">Random Forest Model</h2>
+<div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#most important variables are total_trans_ct, total_trans_amt, total_revolving_bal, total_ct_chng_q4_41, total_relationship_count </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">3</span>, <span class="at">classProbs=</span><span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> twoClassSummary)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>bank_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(bank<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> bank[ bank_index, ]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> bank[<span class="sc">-</span>bank_index, ]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>big_model <span class="ot">=</span><span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"rf"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">tunelength =</span> <span class="dv">4</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute variable importance</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>importance <span class="ot">&lt;-</span> <span class="fu">varImp</span>(big_model)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot variable importance with customized theme</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(importance, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Variables, Importance), <span class="at">y =</span> Importance)) <span class="sc">+</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#1f77b4"</span>) <span class="sc">+</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variables"</span>, <span class="at">y =</span> <span class="st">"Importance"</span>) <span class="sc">+</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Variable Importance"</span>) <span class="sc">+</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="churners_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Behind the Scenes</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#most important variables are total_trans_ct, total_trans_amt, total_revolving_bal, total_ct_chng_q4_41, total_relationship_count </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -777,12 +861,12 @@ contacts_count_12_mon    -1.440254e-17 -1.028874e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choosing "old_spenders" and "young_spenders" to be 2 of the 5 total features in the model: </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>prc2 <span class="ot">=</span> prc<span class="sc">%&gt;%</span> <span class="fu">select</span>(young_spenders,old_spenders) </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#combining these features with rest of bank ds, then grabbing best variables: </span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>banksy <span class="ot">=</span> <span class="fu">cbind</span>(prc2, bank3) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(young_spenders, old_spenders,total_trans_ct,total_trans_amt,total_revolving_bal, churn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choosing "old_spenders" and "young_spenders" to be 2 of the 5 total features in the model: </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>prc2 <span class="ot">=</span> prc<span class="sc">%&gt;%</span> <span class="fu">select</span>(young_spenders,old_spenders) </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#combining these features with rest of bank ds, then grabbing best variables: </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>banksy <span class="ot">=</span> <span class="fu">cbind</span>(prc2, bank3) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(young_spenders, old_spenders,total_trans_ct,total_trans_amt,total_revolving_bal, churn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -791,26 +875,26 @@ contacts_count_12_mon    -1.440254e-17 -1.028874e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the model to be used (i.e. KNN, Naive Bayes, decision tree, random forest, bagged trees) and the tuning parameters used</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">504</span>) </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>bank_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(banksy<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> banksy[ bank_index, ]</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> banksy[<span class="sc">-</span>bank_index, ]</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># example spec for rf</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"knn"</span>,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>,<span class="st">"scale"</span>),</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneGrid =</span> <span class="fu">expand.grid</span>(<span class="at">k =</span> <span class="fu">seq</span>(<span class="dv">31</span>,<span class="dv">41</span>,<span class="dv">2</span>)), <span class="co"># best K between 31 and 41 </span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the model to be used (i.e. KNN, Naive Bayes, decision tree, random forest, bagged trees) and the tuning parameters used</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">504</span>) </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>bank_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(banksy<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> banksy[ bank_index, ]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> banksy[<span class="sc">-</span>bank_index, ]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># example spec for rf</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"knn"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>,<span class="st">"scale"</span>),</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneGrid =</span> <span class="fu">expand.grid</span>(<span class="at">k =</span> <span class="fu">seq</span>(<span class="dv">31</span>,<span class="dv">41</span>,<span class="dv">2</span>)), <span class="co"># best K between 31 and 41 </span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>k-Nearest Neighbors 
@@ -837,7 +921,7 @@ The final value used for the model was k = 37.</code></pre>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
@@ -870,23 +954,23 @@ Prediction   no  yes
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="churners_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Area under the curve: 0.9518</code></pre>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#.95 AUC </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#.95 AUC </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -895,8 +979,8 @@ Prediction   no  yes
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>traindown <span class="ot">=</span> <span class="fu">downSample</span>(<span class="at">x =</span> train[,<span class="sc">-</span><span class="dv">6</span>], <span class="at">y=</span> train<span class="sc">$</span>churn) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> Class) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Class)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>traindown <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(churn) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>traindown <span class="ot">=</span> <span class="fu">downSample</span>(<span class="at">x =</span> train[,<span class="sc">-</span><span class="dv">6</span>], <span class="at">y=</span> train<span class="sc">$</span>churn) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">churn =</span> Class) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Class)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>traindown <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(churn) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
@@ -913,14 +997,14 @@ Prediction   no  yes
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> traindown, </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"rf"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">4</span>, </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> traindown, </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"rf"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">4</span>, </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
@@ -953,23 +1037,23 @@ Prediction   no  yes
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="churners_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(myRoc) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(myRoc) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Area under the curve: 0.9708</code></pre>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AUC .97</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AUC .97</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -978,15 +1062,15 @@ Prediction   no  yes
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#with PCAs "young spenders" and "old spenders" </span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>fit_gbm1 <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">4</span>, </span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>,<span class="st">"scale"</span>),</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#with PCAs "young spenders" and "old spenders" </span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>fit_gbm1 <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">4</span>, </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>,<span class="st">"scale"</span>),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iter   TrainDeviance   ValidDeviance   StepSize   Improve
@@ -1277,7 +1361,7 @@ Iter   TrainDeviance   ValidDeviance   StepSize   Improve
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit_gbm1, test),<span class="fu">factor</span>(test<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit_gbm1, test),<span class="fu">factor</span>(test<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
@@ -1310,34 +1394,34 @@ Prediction   no  yes
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit_gbm1, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit_gbm1, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="churners_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## auc(myRoc)</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kappa = .76, AUC  = .97</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#with only top 5 variables </span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>banksy2 <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">select</span>(total_amt_chng_q4_q1, total_trans_ct, total_trans_amt,total_revolving_bal, total_relationship_count,churn)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>bank_index2 <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(banksy2<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>train2 <span class="ot">&lt;-</span> banksy2[ bank_index2, ]</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>test2 <span class="ot">&lt;-</span> banksy2[<span class="sc">-</span>bank_index2, ]</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>fit_gbm2 <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train2, </span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">4</span>, </span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>,<span class="st">"scale"</span>),</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## auc(myRoc)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kappa = .76, AUC  = .97</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#with only top 5 variables </span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>banksy2 <span class="ot">=</span> bank <span class="sc">%&gt;%</span> <span class="fu">select</span>(total_amt_chng_q4_q1, total_trans_ct, total_trans_amt,total_revolving_bal, total_relationship_count,churn)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>bank_index2 <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(banksy2<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>train2 <span class="ot">&lt;-</span> banksy2[ bank_index2, ]</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>test2 <span class="ot">&lt;-</span> banksy2[<span class="sc">-</span>bank_index2, ]</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>fit_gbm2 <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train2, </span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">4</span>, </span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>,<span class="st">"scale"</span>),</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iter   TrainDeviance   ValidDeviance   StepSize   Improve
@@ -1628,7 +1712,7 @@ Iter   TrainDeviance   ValidDeviance   StepSize   Improve
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit_gbm2, test2),<span class="fu">factor</span>(test2<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit_gbm2, test2),<span class="fu">factor</span>(test2<span class="sc">$</span>churn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
@@ -1661,25 +1745,25 @@ Prediction   no  yes
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test2<span class="sc">$</span>churn, <span class="fu">predict</span>(fit_gbm2, test2, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test2<span class="sc">$</span>churn, <span class="fu">predict</span>(fit_gbm2, test2, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+<p><img src="churners_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## auc(myRoc)</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kappa = .85, AUC .99</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## auc(myRoc)</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kappa = .85, AUC .99</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Surprisingly, model with 5 non-PCA features performed better than the addition of 2 PCA features.</p>
+<p><strong>Surprisingly, model with 5 non-PCA features performed better than the addition of 2 PCA features.</strong></p>
 <div class="cell">
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here are a few lines to inspect your best model. Add some comments about optimal hyperparameters.</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit_gbm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here are a few lines to inspect your best model. Add some comments about optimal hyperparameters.</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit_gbm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Stochastic Gradient Boosting 
@@ -1720,141 +1804,12 @@ The final values used for the model were n.trees = 200, interaction.depth =
 </div>
 <details>
 <summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit_gbm2<span class="sc">$</span>bestTune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit_gbm2<span class="sc">$</span>bestTune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   n.trees interaction.depth shrinkage n.minobsinnode
 16     200                 4       0.1             10</code></pre>
 </div>
-</div>
-</section>
-<section id="re-fit-and-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="re-fit-and-evaluation">Re-fit and evaluation</h2>
-<div class="cell">
-<details>
-<summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the "method" below should match the one you chose above. </span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1504</span>) <span class="co"># I will choose a different seed for evaluation</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>bank_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(banksy2<span class="sc">$</span>churn, <span class="at">p =</span> <span class="fl">0.80</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> banksy2[ bank_index, ]</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> banksy2[<span class="sc">-</span>bank_index, ]</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co"># example spec for rf</span></span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>fit_final <span class="ot">&lt;-</span> <span class="fu">train</span>(churn <span class="sc">~</span> .,</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneGrid=</span>fit_gbm2<span class="sc">$</span>bestTune,</span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
-<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> ctrl) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-     1        0.7986             nan     0.1000    0.0413
-     2        0.7478             nan     0.1000    0.0259
-     3        0.7070             nan     0.1000    0.0195
-     4        0.6749             nan     0.1000    0.0153
-     5        0.6478             nan     0.1000    0.0132
-     6        0.6198             nan     0.1000    0.0131
-     7        0.5916             nan     0.1000    0.0119
-     8        0.5698             nan     0.1000    0.0104
-     9        0.5511             nan     0.1000    0.0083
-    10        0.5349             nan     0.1000    0.0068
-    20        0.4235             nan     0.1000    0.0030
-    40        0.3064             nan     0.1000    0.0022
-    60        0.2542             nan     0.1000    0.0013
-    80        0.2261             nan     0.1000    0.0001
-   100        0.2072             nan     0.1000    0.0002
-   120        0.1915             nan     0.1000    0.0001
-   140        0.1802             nan     0.1000   -0.0000
-   160        0.1690             nan     0.1000    0.0000
-   180        0.1624             nan     0.1000   -0.0001
-   200        0.1556             nan     0.1000   -0.0002
-
-Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-     1        0.7979             nan     0.1000    0.0390
-     2        0.7467             nan     0.1000    0.0246
-     3        0.7097             nan     0.1000    0.0181
-     4        0.6751             nan     0.1000    0.0162
-     5        0.6485             nan     0.1000    0.0123
-     6        0.6219             nan     0.1000    0.0120
-     7        0.6021             nan     0.1000    0.0093
-     8        0.5840             nan     0.1000    0.0079
-     9        0.5660             nan     0.1000    0.0087
-    10        0.5506             nan     0.1000    0.0072
-    20        0.4232             nan     0.1000    0.0037
-    40        0.3191             nan     0.1000    0.0012
-    60        0.2628             nan     0.1000    0.0010
-    80        0.2316             nan     0.1000    0.0001
-   100        0.2070             nan     0.1000    0.0002
-   120        0.1927             nan     0.1000    0.0001
-   140        0.1812             nan     0.1000   -0.0001
-   160        0.1712             nan     0.1000    0.0001
-   180        0.1650             nan     0.1000    0.0000
-   200        0.1579             nan     0.1000    0.0000
-
-Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-     1        0.7999             nan     0.1000    0.0391
-     2        0.7434             nan     0.1000    0.0273
-     3        0.7035             nan     0.1000    0.0186
-     4        0.6726             nan     0.1000    0.0151
-     5        0.6451             nan     0.1000    0.0125
-     6        0.6228             nan     0.1000    0.0113
-     7        0.5987             nan     0.1000    0.0106
-     8        0.5757             nan     0.1000    0.0108
-     9        0.5533             nan     0.1000    0.0103
-    10        0.5374             nan     0.1000    0.0073
-    20        0.4230             nan     0.1000    0.0035
-    40        0.3201             nan     0.1000    0.0012
-    60        0.2668             nan     0.1000    0.0009
-    80        0.2377             nan     0.1000    0.0001
-   100        0.2172             nan     0.1000    0.0002
-   120        0.2038             nan     0.1000    0.0001
-   140        0.1914             nan     0.1000   -0.0001
-   160        0.1825             nan     0.1000   -0.0001
-   180        0.1733             nan     0.1000   -0.0001
-   200        0.1665             nan     0.1000   -0.0002
-
-Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-     1        0.7984             nan     0.1000    0.0396
-     2        0.7475             nan     0.1000    0.0248
-     3        0.7076             nan     0.1000    0.0197
-     4        0.6744             nan     0.1000    0.0156
-     5        0.6376             nan     0.1000    0.0185
-     6        0.6141             nan     0.1000    0.0112
-     7        0.5897             nan     0.1000    0.0112
-     8        0.5712             nan     0.1000    0.0091
-     9        0.5574             nan     0.1000    0.0067
-    10        0.5412             nan     0.1000    0.0072
-    20        0.4317             nan     0.1000    0.0042
-    40        0.3195             nan     0.1000    0.0017
-    60        0.2692             nan     0.1000    0.0008
-    80        0.2387             nan     0.1000    0.0004
-   100        0.2193             nan     0.1000    0.0005
-   120        0.2047             nan     0.1000   -0.0001
-   140        0.1942             nan     0.1000    0.0000
-   160        0.1859             nan     0.1000    0.0000
-   180        0.1769             nan     0.1000   -0.0001
-   200        0.1717             nan     0.1000   -0.0001</code></pre>
-</div>
-<details>
-<summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The last line means we will fit a model using the best tune parameters your CV found above.</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>myRoc <span class="ot">&lt;-</span> <span class="fu">roc</span>(test<span class="sc">$</span>churn, <span class="fu">predict</span>(fit_final, test, <span class="at">type=</span><span class="st">"prob"</span>)[,<span class="dv">2</span>])</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myRoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="churners_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
-<details>
-<summary>Behind the Scenes</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="do">## auc(myRoc)</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Area under the curve: 0.988</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 
 

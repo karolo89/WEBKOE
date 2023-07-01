@@ -1,0 +1,5 @@
+"0","bank = bank %>% mutate(churn = as.factor(churn))"
+"0",""
+"0","variables = bank %>% select(-churn) %>% colnames() "
+"0",""
+"0",""

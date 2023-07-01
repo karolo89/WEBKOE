@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -161,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="Data Journalism">Data Journalism</div><div class="category" data-category="R">R</div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="Machine Learning">Machine Learning</div><div class="category" data-category="Prediction">Prediction</div><div class="category" data-category="R">R</div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -174,9 +174,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Data Journalism,R" data-listing-file-modified-sort="1688172191340" data-listing-reading-time-sort="5.53">
+<div class="quarto-post image-right" data-index="0" data-categories="R,Machine Learning,Prediction" data-listing-date-sort="1678521600000" data-listing-file-modified-sort="1688177100601" data-listing-reading-time-sort="9.55">
 <div class="thumbnail">
-<p><a href="./projects/Churners/churners.html"> <img src="./projects/Churners/theranos.jpg" class="thumnail-image"> </a></p>
+<p><a href="./projects/Churners/churners.html"> <img src="./projects/Churners/churn.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./projects/Churners/churners.html">
@@ -188,26 +188,32 @@ Customer Churn Prediction
 </div>
 </a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Data Journalism'); return false;">
-Data Journalism
-</div>
 <div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
 R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Machine Learning'); return false;">
+Machine Learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Prediction'); return false;">
+Prediction
 </div>
 </div>
 <a href="./projects/Churners/churners.html">
 <div class="listing-description">
-This report…
+This report presents an analysis of bank customer churn using a dataset containing various attributes of bank customers. The goal is to predict whether a customer is likely…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="./projects/Churners/churners.html">
+<div class="listing-date">
+March 11, 2023
+</div>
 <div class="listing-author">
 Orozco Karol M.
 </div>
 <div class="listing-reading-time">
-5 min
+9 min
 </div>
 </a>
 </div>

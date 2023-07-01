@@ -1,7 +1,7 @@
 ---
-title: "Market Segmentation Analysis:"
+title: "Market Segmentation Analysis"
 author: "Orozco Karol M."
-image: mall.jpg
+image: customer.jpg
 date: "06-30-2023"
 format:
   html:

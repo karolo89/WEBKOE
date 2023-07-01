@@ -1,0 +1,40 @@
+---
+title: "Brand Perception Survey Analysis"
+author: "Orozco Karol M."
+image: churn.jpg
+date: "5-20-2023"
+format:
+  html:
+    toc: true
+    toc-location: right
+    html-math-method: katex
+    page-layout: full
+execute: 
+  warning: false
+  message: false
+categories: [R, Machine Learning, Prediction]
+---
+
+## Introduction:
+
+
+## Approach and Methodology
+
+
+
+#### Load the required packages
+
+```{r}
+
+```
+
+## Data Summary:
+
+
+## Data Exploration:
+
+
+## Feature Engineering
+
+
+## Conclusion

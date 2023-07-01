@@ -1,0 +1,47 @@
+---
+title: "Market Segmentation Analysis:"
+author: "Orozco Karol M."
+image: churn.jpg
+date: "06-30-2023"
+format:
+  html:
+    toc: true
+    toc-location: right
+    html-math-method: katex
+    page-layout: full
+execute: 
+  warning: false
+  message: false
+categories: [R, Machine Learning, Prediction]
+---
+
+## Introduction:
+
+ I conducted a market segmentation analysis for a consumer goods company to identify distinct customer segments based on their demographic, psychographic, and behavioral characteristics. The analysis involved data cleaning, exploratory data analysis, and clustering techniques such as k-means clustering and hierarchical clustering.
+
+## Approach and Methodology
+
+
+
+#### Load the required packages
+
+```{r}
+
+```
+
+## Data Summary:
+
+
+
+## Data Exploration:
+
+
+
+## Principal Component Analysis (PCA):
+
+
+
+## KNN Model
+
+
+## Conclusion

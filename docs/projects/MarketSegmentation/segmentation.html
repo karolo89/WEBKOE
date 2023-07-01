@@ -220,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#dataset-and-methods-used" id="toc-dataset-and-methods-used" class="nav-link" data-scroll-target="#dataset-and-methods-used">Dataset and Methods Used</a></li>
   <li><a href="#project-highlights" id="toc-project-highlights" class="nav-link" data-scroll-target="#project-highlights">Project Highlights</a></li>
   <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-means Clustering</a></li>
-  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a></li>
+  <li><a href="#cluster-analysis" id="toc-cluster-analysis" class="nav-link" data-scroll-target="#cluster-analysis">Cluster Analysis</a></li>
   </ul>
 </nav>
     </div>
@@ -241,6 +241,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="project-highlights" class="level2">
 <h2 class="anchored" data-anchor-id="project-highlights">Project Highlights</h2>
 <p>The project yielded several important highlights and insights:</p>
+<p>Age Distribution: The analysis of the age distribution revealed that the majority of customers in the database were adults below 40 years old. There were fewer middle-aged and older adults represented in the customer base.</p>
+<p>Annual Income Distribution: The distribution of annual income showed that a significant number of customers had an income range of approximately $60,000 to $80,000 per year. However, there were fewer customers with higher annual incomes.</p>
+<p>Spending Score Distribution: The distribution of spending scores exhibited a more balanced pattern, with a concentration around the mean value. However, there were still notable proportions of customers with both low and high spending scores.</p>
+<p>Market Segmentation: Through the application of K-means clustering, the analysis identified five distinct customer segments based on their demographic and spending characteristics.</p>
+<ol type="a">
+<li><p>“Young and Moderate Income” Cluster: This segment consisted of young individuals with a moderate income level and average spending behavior.</p></li>
+<li><p>“Middle-Aged and Moderate Income” Cluster: This segment represented middle-aged individuals with moderate incomes and average spending habits.</p></li>
+<li><p>“Young and High Spending” Cluster: Despite having lower incomes, individuals in this cluster exhibited a tendency for high spending.</p></li>
+<li><p>“Middle-Aged and Conservative Spending” Cluster: Customers in this cluster had higher incomes but conservative spending habits, emphasizing financial stability and savings.</p></li>
+<li><p>“Young and High Income” Cluster: This segment consisted of young individuals with high incomes and high spending scores, representing an affluent customer group.</p></li>
+</ol>
 <section id="load-the-required-packages-and-dataset" class="level4">
 <h4 class="anchored" data-anchor-id="load-the-required-packages-and-dataset">Load the required packages and dataset</h4>
 <div class="cell">
@@ -445,8 +456,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="findings" class="level2">
-<h2 class="anchored" data-anchor-id="findings">Findings</h2>
+<section id="cluster-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis">Cluster Analysis</h2>
 <p>“Young and Moderate Income” Cluster: This cluster consists of young individuals with a moderate income level and average spending behavior. To target this segment effectively, the marketing manager can focus on offering affordable products or services that align with the interests and preferences of this younger demographic. Promotional campaigns that highlight value for money, convenience, and trendy features could resonate well with this cluster.</p>
 <p>“Middle-Aged and Moderate Income” Cluster: This cluster represents middle-aged individuals with moderate incomes and average spending habits. The marketing manager can target this segment by emphasizing quality, durability, and reliability in their products or services. Highlighting the long-term value and practicality of the offerings can be effective in capturing the attention of this cluster.</p>
 <p>“Young and High Spending” Cluster: Despite their lower incomes, individuals in this cluster exhibit a tendency for high spending. The marketing manager can capitalize on this by offering attractive financing options, discounts, or loyalty programs that reward their spending. Promoting exclusive or unique experiences can also appeal to this segment, as they may prioritize indulgence and personal enjoyment.</p>

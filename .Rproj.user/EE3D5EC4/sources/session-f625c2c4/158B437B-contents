@@ -27,6 +27,24 @@ The dataset used in this analysis is a customer database from a mall, containing
 
 The project yielded several important highlights and insights:
 
+Age Distribution: The analysis of the age distribution revealed that the majority of customers in the database were adults below 40 years old. There were fewer middle-aged and older adults represented in the customer base.
+
+Annual Income Distribution: The distribution of annual income showed that a significant number of customers had an income range of approximately $60,000 to $80,000 per year. However, there were fewer customers with higher annual incomes.
+
+Spending Score Distribution: The distribution of spending scores exhibited a more balanced pattern, with a concentration around the mean value. However, there were still notable proportions of customers with both low and high spending scores.
+
+Market Segmentation: Through the application of K-means clustering, the analysis identified five distinct customer segments based on their demographic and spending characteristics.
+
+a. "Young and Moderate Income" Cluster: This segment consisted of young individuals with a moderate income level and average spending behavior.
+
+b. "Middle-Aged and Moderate Income" Cluster: This segment represented middle-aged individuals with moderate incomes and average spending habits.
+
+c. "Young and High Spending" Cluster: Despite having lower incomes, individuals in this cluster exhibited a tendency for high spending.
+
+d. "Middle-Aged and Conservative Spending" Cluster: Customers in this cluster had higher incomes but conservative spending habits, emphasizing financial stability and savings.
+
+e. "Young and High Income" Cluster: This segment consisted of young individuals with high incomes and high spending scores, representing an affluent customer group.
+
 #### Load the required packages and dataset
 
 ```{r}
@@ -203,7 +221,7 @@ theme_minimal() +
 
 
 ```
-## Findings
+## Cluster Analysis
 
 "Young and Moderate Income" Cluster: This cluster consists of young individuals with a moderate income level and average spending behavior. To target this segment effectively, the marketing manager can focus on offering affordable products or services that align with the interests and preferences of this younger demographic. Promotional campaigns that highlight value for money, convenience, and trendy features could resonate well with this cluster.
 

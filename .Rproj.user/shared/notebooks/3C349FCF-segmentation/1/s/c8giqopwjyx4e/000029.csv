@@ -1,0 +1,8 @@
+"0",""
+"0","cust_kmean <- eclust(customer_data %>% "
+"0","               select(AnnualIncome, SpendingScore, Age),"
+"0","               stand = TRUE,FUNcluster = ""kmeans"",k=5,graph = F)"
+"0",""
+"0","aggregate(customer_data %>% "
+"0","               select(AnnualIncome, SpendingScore, Age),"
+"0","          by =list(gerombol=cust_kmean$cluster), FUN = mean)"

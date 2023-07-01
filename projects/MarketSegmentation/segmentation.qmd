@@ -69,7 +69,7 @@ gender_plot <- ggplot(gender_data, aes(x = gender, y = gender_counts, fill = gen
   geom_bar(stat = "identity", width = 0.6, color = "white") +
   theme_minimal() +
   scale_fill_manual(values = colors) +
-  labs(x = "", y = "Count", fill = "Gender") +
+  labs(x = "", y = "Count", fill = "") +
   geom_text(aes(label = label), position = position_stack(vjust = 0.5)) +
   ggtitle("Gender Distribution") +
   theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5),

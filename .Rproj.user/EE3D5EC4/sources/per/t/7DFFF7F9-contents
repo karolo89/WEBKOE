@@ -1,0 +1,42 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  open-graph: true
+  title: "Karol M. Orozco"
+  navbar:
+    right:
+      - text: "About Me"
+        file: index.qmd
+      - text: "Projects"
+        file: portfolio.qmd
+      - text: "Blog"
+        file: blog.qmd        
+      - text: "Professional Summary"
+        file: resume.qmd
+      
+  page-footer:
+    left:
+      - href: https://www.quarto.org
+        text: Made with quarto®
+    right: 
+      - icon: linkedin
+        href: https://www.linkedin.com/in/karolorozcoe/
+      - icon: github
+        href: https://github.com/karolo89
+      - icon: envelope-fill
+        href: mailto:karol.marianoe@gmail.com
+format:
+  html:
+    citations-hover: true
+    footnotes-hover: true
+    theme: 
+      light: LightTheme.css
+      dark: DarkTheme.scss
+    code-copy: true
+    code-summary: "Behind the Scenes"
+
+editor: visual
+
+

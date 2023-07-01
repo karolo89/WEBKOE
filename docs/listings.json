@@ -9,7 +9,11 @@
   {
     "listing": "/portfolio.html",
     "items": [
-      "/projects/Churners/churners.html"
+      "/projects/MarketSegmentation/segmentation.html",
+      "/projects/BrandPerception/brand.html",
+      "/projects/Churners/churners.html",
+      "/projects/CLVAnalysis/CustomerLifetimeValue.html",
+      "/projects/SatisfactionAnalysis/satisfaction.html"
     ]
   }
 ]

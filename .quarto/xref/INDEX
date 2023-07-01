@@ -38,5 +38,17 @@
   },
   "projects/Churners/churners.qmd": {
     "churners.html": "541e2d33"
+  },
+  "projects/BrandPerception/brand.qmd": {
+    "brand.html": "dd218bad"
+  },
+  "projects/CLVAnalysis/CustomerLifetimeValue.qmd": {
+    "CustomerLifetimeValue.html": "da68dc43"
+  },
+  "projects/MarketSegmentation/segmentation.qmd": {
+    "segmentation.html": "75382cca"
+  },
+  "projects/SatisfactionAnalysis/satisfaction.qmd": {
+    "satisfaction.html": "4ccc7efe"
   }
 }

@@ -1,5 +1,5 @@
 ---
-title: "Customer Satisfaction Analysis"
+title: "Customer Lifetime Value (CLV) Analysis"
 author: "Orozco Karol M."
 image: churn.jpg
 date: "3-11-2023"
@@ -17,11 +17,9 @@ categories: [R, Machine Learning, Prediction]
 
 ## Introduction:
 
-I conducted a customer satisfaction analysis for a service-based organization to assess customer satisfaction levels and identify areas for improvement. The analysis involved data cleaning, calculation of satisfaction scores, statistical analysis (e.g., t-tests, ANOVA) to identify significant differences, and visualization of results using charts and graphs.
+ I conducted a CLV analysis for a subscription-based business to estimate the long-term value of customers. The analysis involved data preparation, calculation of customer lifetime value using different models (e.g., RFM analysis, cohort analysis), and visualization of results to identify high-value customer segments.
 
 ## Approach and Methodology
-
-
 
 #### Load the required packages
 
@@ -31,11 +29,8 @@ I conducted a customer satisfaction analysis for a service-based organization to
 
 ## Data Summary:
 
-
 ## Data Exploration:
 
-
 ## Feature Engineering
-
 
 ## Conclusion

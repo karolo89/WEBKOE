@@ -1,0 +1,14 @@
+{
+  "hash": "51b33870571951d896af87fcf2e4b615",
+  "result": {
+    "markdown": "---\ntitle: \"Market Segmentation Analysis:\"\nauthor: \"Orozco Karol M.\"\nimage: mall.jpg\ndate: \"06-30-2023\"\nformat:\n  html:\n    toc: true\n    toc-location: right\n    html-math-method: katex\n    page-layout: full\nexecute: \n  warning: false\n  message: false\ncategories: [R, Machine Learning, Prediction]\n---\n\n\n## Introduction:\n\n\n## Approach and Methodology\n\n\n\n#### Load the required packages and dataset\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(caret)\nlibrary(pROC)\nlibrary(MLmetrics)\nlibrary(fastDummies)\nlibrary(skimr)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nmall <- read.csv(\"https://raw.githubusercontent.com/karolo89/WEBKOE/main/projects/MarketSegmentation/Mall_Customers.csv\")\n\nskim(mall)\n```\n\n::: {.cell-output-display}\nTable: Data summary\n\n|                         |     |\n|:------------------------|:----|\n|Name                     |mall |\n|Number of rows           |200  |\n|Number of columns        |5    |\n|_______________________  |     |\n|Column type frequency:   |     |\n|character                |1    |\n|numeric                  |4    |\n|________________________ |     |\n|Group variables          |None |\n\n\n**Variable type: character**\n\n|skim_variable | n_missing| complete_rate| min| max| empty| n_unique| whitespace|\n|:-------------|---------:|-------------:|---:|---:|-----:|--------:|----------:|\n|Gender        |         0|             1|   4|   6|     0|        2|          0|\n\n\n**Variable type: numeric**\n\n|skim_variable          | n_missing| complete_rate|   mean|    sd| p0|   p25|   p50|    p75| p100|hist  |\n|:----------------------|---------:|-------------:|------:|-----:|--:|-----:|-----:|------:|----:|:-----|\n|CustomerID             |         0|             1| 100.50| 57.88|  1| 50.75| 100.5| 150.25|  200|▇▇▇▇▇ |\n|Age                    |         0|             1|  38.85| 13.97| 18| 28.75|  36.0|  49.00|   70|▆▇▅▃▂ |\n|Annual.Income..k..     |         0|             1|  60.56| 26.26| 15| 41.50|  61.5|  78.00|  137|▆▇▇▂▁ |\n|Spending.Score..1.100. |         0|             1|  50.20| 25.82|  1| 34.75|  50.0|  73.00|   99|▃▃▇▃▃ |\n:::\n:::\n\n\n\n## Data Summary:\n\n\n\n## Data Exploration:\n\n\n\n## Principal Component Analysis (PCA):\n\n\n::: {.cell}\n\n:::\n\n\n\n## KNN Model\n\n\n::: {.cell}\n\n:::\n\n\n\n## Conclusion",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "hash": "dcc3a77113682d4207df0a9b9ea06754",
+  "result": {
+    "markdown": "---\ntitle: \"Brand Perception Survey Analysis\"\nauthor: \"Orozco Karol M.\"\nimage: churn.jpg\ndate: \"5-20-2023\"\nformat:\n  html:\n    toc: true\n    toc-location: right\n    html-math-method: katex\n    page-layout: full\nexecute: \n  warning: false\n  message: false\ncategories: [R, Machine Learning, Prediction]\n---\n\n\n## Introduction:\n\n\n## Approach and Methodology\n\n\n\n#### Load the required packages\n\n\n::: {.cell}\n\n:::\n\n\n## Data Summary:\n\n\n## Data Exploration:\n\n\n## Feature Engineering\n\n\n## Conclusion",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

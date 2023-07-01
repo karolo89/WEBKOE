@@ -35,7 +35,6 @@ format:
       light: LightTheme.css
       dark: DarkTheme.scss
     code-copy: true
-    code-fold: true
     code-summary: "Behind the Scenes"
 
 editor: visual

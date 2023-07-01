@@ -39,8 +39,6 @@ Regarding political polarization, experts challenge Facebook CEO Mark Zuckerberg
 
 Facebook's algorithm limits exposure to cross-cutting links, causing users to connect with others who share the same political beliefs and reducing the likelihood of encountering diverse opinions. While this algorithm aims to enhance user experience, it inadvertently reduces politically diverse content by around 5% for conservatives and 8% for liberals. Typically, individuals have five politically like-minded friends on Facebook for every friend from the opposing side.
 
-\![\](politic.jpg){style="display: block; margin: 0 auto;"}
-
 Although Silicon Valley is not solely responsible for these issues, a study conducted in March 2020 showed that taking a break from Facebook for a month significantly reduced polarization of views on policy issues among participants. The study published by the American Economic Review suggested that exposure to political content on social media tends to provoke heightened emotions, anger toward the opposing side, and more robust views on specific issues, which contradicts Facebook's narrative.
 
 #### Algorithmic Failure's High Costs

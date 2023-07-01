@@ -35,5 +35,8 @@
   },
   "blog/Theranos/theranos.qmd": {
     "theranos.html": "5bbe43aa"
+  },
+  "projects/Churners/churners.qmd": {
+    "churners.html": "541e2d33"
   }
 }

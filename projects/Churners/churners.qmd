@@ -1,0 +1,252 @@
+---
+title: "Customer Churn Prediction"
+author: "Orozco Karol M."
+categories: [Data Journalism, R]
+image: theranos.jpg
+---
+
+This report presents an analysis of bank customer churn. The dataset contains various attributes of bank customers, and the goal is to predict whether a customer is likely to churn or not.
+
+**Task:** Create a model that predicts churns of bank customers using only 5 features. 
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(caret)
+library(pROC)
+library(MLmetrics)
+library(fastDummies)
+library(skimr)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+
+## Setup
+
+```{r}
+bank <-readRDS(gzcon(url("https://github.com/karolo89/Raw_Data/raw/main/BankChurners.rds")))  
+bank = bank %>% rename_all(funs(tolower(.))) 
+
+
+skim(bank)
+
+bank = bank %>% mutate(churn = as.factor(churn))
+
+variables = bank %>% select(-churn) %>% colnames() 
+
+
+```
+## PCA on bank data
+
+```{r}
+bank = bank %>% mutate(churn = as.factor(churn))
+bank2 = bank %>% select(-churn) %>% dummy_cols(remove_selected_columns = T)
+
+bank3 = cbind(bank2, select(bank,churn))
+
+pr_bank = prcomp(x = select(bank3,-churn), scale = T, center = T)
+summary(pr_bank)
+
+screeplot(pr_bank, type = "lines")
+
+head(pr_bank$rotation)
+```
+
+```{r}
+rownames_to_column(as.data.frame(pr_bank$rotation)) %>% 
+  select(1:5) %>% 
+    filter(abs(PC1) >= 0.3 | abs(PC2) >= 0.3 | abs(PC3) >= 0.3 | abs(PC4) >= 0.3)
+
+prc = bind_cols(select(bank3, churn), as.data.frame(pr_bank$x)) %>%
+  select(1:5) %>%
+    rename("rich_men" = PC1, "cheap_men" = PC2, "young_spenders" = PC3, "old_spenders"= PC4)
+
+#based on the graph below, "young spenders" and "old spenders" seem to be the most predictive of whether the customer will churn. 
+
+prc %>%
+pivot_longer(cols = -churn, names_to = "component", values_to = "loading") %>% mutate(churn = as.factor(churn)) %>%
+ggplot(aes(loading, fill=churn)) +
+geom_density(alpha = 0.5) +
+facet_grid(.~component)
+
+```
+
+
+## Random Forest model with all variables on entire ds, then  plotting importance of variables to see most impactful: 
+
+```{r}
+ctrl <- trainControl(method = "cv", number = 3, classProbs=TRUE, summaryFunction = twoClassSummary)
+
+bank_index <- createDataPartition(bank$churn, p = 0.80, list = FALSE)
+train <- bank[ bank_index, ]
+test <- bank[-bank_index, ]
+
+big_model =train(churn ~ .,
+             data = train, 
+             method = "rf",
+             tunelength = 4,
+             metric = "ROC",
+             trControl = ctrl)
+
+importance = varImp(big_model)
+
+plot(importance)
+
+#most important variables are total_trans_ct, total_trans_amt, total_revolving_bal, total_ct_chng_q4_41, total_relationship_count 
+```
+
+## Combining PRC variables with top columns 
+
+```{r}
+#choosing "old_spenders" and "young_spenders" to be 2 of the 5 total features in the model: 
+prc2 = prc%>% select(young_spenders,old_spenders) 
+
+#combining these features with rest of bank ds, then grabbing best variables: 
+banksy = cbind(prc2, bank3) %>% 
+            select(young_spenders, old_spenders,total_trans_ct,total_trans_amt,total_revolving_bal, churn)
+```
+
+## KNN Model 
+
+```{r}
+# specify the model to be used (i.e. KNN, Naive Bayes, decision tree, random forest, bagged trees) and the tuning parameters used
+
+
+
+set.seed(504) 
+
+bank_index <- createDataPartition(banksy$churn, p = 0.80, list = FALSE)
+train <- banksy[ bank_index, ]
+test <- banksy[-bank_index, ]
+
+# example spec for rf
+fit <- train(churn ~ .,
+             data = train, 
+             method = "knn",
+             preProcess = c("center","scale"),
+             tuneGrid = expand.grid(k = seq(31,41,2)), # best K between 31 and 41 
+             metric = "ROC",
+             trControl = ctrl)
+
+fit
+
+confusionMatrix(predict(fit, test),factor(test$churn))
+
+myRoc <- roc(test$churn, predict(fit, test, type="prob")[,2])
+
+plot(myRoc)
+auc(myRoc)
+#.95 AUC 
+```
+
+## Downsampling bank data to remove imbalance of yes/no churn: 
+
+```{r}
+traindown = downSample(x = train[,-6], y= train$churn) %>% mutate(churn = Class) %>% select(-Class)
+traindown %>% group_by(churn) %>% count()
+```
+
+## Random Forest Model with downsampling
+
+```{r}
+fit <- train(churn ~ .,
+             data = traindown, 
+             method = "rf",
+             tuneLength = 4, 
+             metric = "ROC",
+             trControl = ctrl)
+
+confusionMatrix(predict(fit, test),factor(test$churn))
+
+myRoc <- roc(test$churn, predict(fit, test, type="prob")[,2])
+
+plot(myRoc)
+auc(myRoc) 
+# AUC .97
+```
+
+## Gradient boosted model with PCA vs only top 5 variables: 
+
+```{r}
+#with PCAs "young spenders" and "old spenders" 
+
+fit_gbm1 <- train(churn ~ .,
+             data = train, 
+             method = "gbm",
+             tuneLength = 4, 
+             preProcess = c("center","scale"),
+             metric = "ROC",
+             trControl = ctrl)
+
+
+confusionMatrix(predict(fit_gbm1, test),factor(test$churn))
+
+myRoc <- roc(test$churn, predict(fit_gbm1, test, type="prob")[,2])
+
+plot(myRoc)
+## auc(myRoc)
+#kappa = .76, AUC  = .97
+
+
+#with only top 5 variables 
+
+banksy2 = bank %>% select(total_amt_chng_q4_q1, total_trans_ct, total_trans_amt,total_revolving_bal, total_relationship_count,churn)
+
+bank_index2 <- createDataPartition(banksy2$churn, p = 0.80, list = FALSE)
+train2 <- banksy2[ bank_index2, ]
+test2 <- banksy2[-bank_index2, ]
+
+fit_gbm2 <- train(churn ~ .,
+             data = train2, 
+             method = "gbm",
+             tuneLength = 4, 
+             preProcess = c("center","scale"),
+             metric = "ROC",
+             trControl = ctrl)
+
+confusionMatrix(predict(fit_gbm2, test2),factor(test2$churn))
+
+myRoc <- roc(test2$churn, predict(fit_gbm2, test2, type="prob")[,2])
+
+plot(myRoc)
+## auc(myRoc)
+#kappa = .85, AUC .99
+```
+
+Surprisingly, model with 5 non-PCA features performed better than the addition of 2 PCA features. 
+
+```{r}
+# Here are a few lines to inspect your best model. Add some comments about optimal hyperparameters.
+print(fit_gbm2)
+print(fit_gbm2$bestTune)
+```
+
+
+## Re-fit and evaluation
+
+```{r}
+# the "method" below should match the one you chose above. 
+
+set.seed(1504) # I will choose a different seed for evaluation
+
+bank_index <- createDataPartition(banksy2$churn, p = 0.80, list = FALSE)
+train <- banksy2[ bank_index, ]
+test <- banksy2[-bank_index, ]
+
+# example spec for rf
+fit_final <- train(churn ~ .,
+             data = train, 
+             method = "gbm",
+             tuneGrid=fit_gbm2$bestTune,
+             metric = "ROC",
+             trControl = ctrl) 
+# The last line means we will fit a model using the best tune parameters your CV found above.
+
+myRoc <- roc(test$churn, predict(fit_final, test, type="prob")[,2])
+
+plot(myRoc)
+## auc(myRoc)
+
+#Area under the curve: 0.988
+```
+
+

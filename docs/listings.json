@@ -8,6 +8,8 @@
   },
   {
     "listing": "/portfolio.html",
-    "items": []
+    "items": [
+      "/projects/Churners/churners.html"
+    ]
   }
 ]

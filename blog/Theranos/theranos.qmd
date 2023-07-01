@@ -73,9 +73,9 @@ By implementing these recommendations, Theranos can begin to address its perform
 
 1.  Carreyrou, J. (Year). *Bad Blood* (p.183).
 
-2.  Fuller, T., & Masko, J. (Year). *Theranos: The Unicorn that Wasn\'t* (The Unicorn, p.10).
+2.  Fuller, T., & Masko, J. (Year). *Theranos: The Unicorn that Wasn't* (The Unicorn, p.10).
 
-3.  Fuller, T., & Masko, J. (Year). *Theranos: The Unicorn that Wasn\'t* (Exhibit 5 "Timeline of Theranos Publicity and Exposure" Industry Flash Report -- Laboratory Services November 2016). Retrieved from [**link**](https://www.kaufmanhall.com/sites/default/files/legacy_files/MA%20Industry%20Flash%20Report%20Laboratory%20Services%20November%202016.pdf)
+3.  Fuller, T., & Masko, J. (Year). *Theranos: The Unicorn that Wasn't* (Exhibit 5 "Timeline of Theranos Publicity and Exposure" Industry Flash Report -- Laboratory Services November 2016). Retrieved from [**link**](https://www.kaufmanhall.com/sites/default/files/legacy_files/MA%20Industry%20Flash%20Report%20Laboratory%20Services%20November%202016.pdf)
 
 4.  Country Report: United States of America. (Year). *Health Expenditures* (p.2). Retrieved from [**link**](https://www.paho.org/salud-en-las-americas-2017/?p=2432)
 
@@ -83,7 +83,7 @@ By implementing these recommendations, Theranos can begin to address its perform
 
 6.  Author(s) or Organization. (Year). *A Guide to Healthcare Compliance Regulations* \[Description\]. Retrieved from [**link**](https://chat.openai.com/URL)
 
-7.  Country Report: United States of America. (Year). *Monitoring the Health System\'s Organization, Provision of Care, and Performance* (p.2). Retrieved from [**link**](https://www.paho.org/salud-en-las-americas-2017/?p=2432)
+7.  Country Report: United States of America. (Year). *Monitoring the Health System's Organization, Provision of Care, and Performance* (p.2). Retrieved from [**link**](https://www.paho.org/salud-en-las-americas-2017/?p=2432)
 
 8.  Author(s) or Organization. (Year). *Pharmaceutical product development: A quality by design approach*. Retrieved from [**link**](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4991121/)
 

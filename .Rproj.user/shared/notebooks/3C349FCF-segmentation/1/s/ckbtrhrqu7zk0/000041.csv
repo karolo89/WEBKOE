@@ -1,0 +1,8 @@
+"0","# Spending Score Visualization"
+"0","hist(customer_data$Spending.Score..1.100.,"
+"0","     col = ""#336699"","
+"0","     main = ""Spending Score Distribution"","
+"0","     xlab = ""Spending Score"","
+"0","     ylab = ""Frequency"") + hist_theme"
+"1","NULL
+"

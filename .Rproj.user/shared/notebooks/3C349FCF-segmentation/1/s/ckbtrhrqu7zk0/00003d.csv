@@ -1,0 +1,10 @@
+"0",""
+"0",""
+"0","# Apply the improved theme to the Age Distribution plot"
+"0","hist(customer_data$Age,"
+"0","     col = ""#336699"","
+"0","     main = ""Age Distribution"","
+"0","     xlab = ""Age"","
+"0","     ylab = ""Frequency"") + hist_theme"
+"1","NULL
+"

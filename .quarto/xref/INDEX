@@ -50,5 +50,14 @@
   },
   "projects/SatisfactionAnalysis/satisfaction.qmd": {
     "satisfaction.html": "4ccc7efe"
+  },
+  "BrandPerception/brand.qmd": {
+    "brand.html": "64cf69d1"
+  },
+  "CLVAnalysis/CustomerLifetimeValue.qmd": {
+    "CustomerLifetimeValue.html": "0e364372"
+  },
+  "SatisfactionAnalysis/satisfaction.qmd": {
+    "satisfaction.html": "25ccabf0"
   }
 }

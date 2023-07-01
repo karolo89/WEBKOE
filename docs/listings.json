@@ -10,10 +10,7 @@
     "listing": "/portfolio.html",
     "items": [
       "/projects/MarketSegmentation/segmentation.html",
-      "/projects/BrandPerception/brand.html",
-      "/projects/Churners/churners.html",
-      "/projects/CLVAnalysis/CustomerLifetimeValue.html",
-      "/projects/SatisfactionAnalysis/satisfaction.html"
+      "/projects/Churners/churners.html"
     ]
   }
 ]

@@ -1,0 +1,9 @@
+"0","# Annual Income Visualization"
+"0","hist(customer_data$Annual.Income..k..,"
+"0","     col = ""#336699"","
+"0","     main = ""Annual Income Distribution"","
+"0","     xlab = ""Annual Income (k)"","
+"0","     ylab = ""Frequency"") +"
+"0","  hist_theme"
+"1","NULL
+"

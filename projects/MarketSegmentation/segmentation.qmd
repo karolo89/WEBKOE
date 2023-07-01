@@ -52,15 +52,6 @@ skim(customer_data)
 
 ```{r}
 
-library(ggplot2)
-library(dplyr)
-
-# Improve theme for the histogram
-hist_theme <- theme(
-  plot.title = element_text(size = 16, face = "bold"),
-  axis.text = element_text(size = 12),
-  axis.title = element_text(size = 14, face = "bold")
-)
 # Calculate gender percentages
 gender_counts <- table(customer_data$Gender)
 gender_pct <- round(gender_counts / sum(gender_counts) * 100)
@@ -74,7 +65,7 @@ gender_data <- data.frame(gender = names(gender_counts), count = gender_counts) 
   mutate(label = gender_labels)
 
 # Create a bar plot to visualize the gender variable
-ggplot(gender_data, aes(x = gender, y = gender_counts, fill = gender)) +
+gender_plot <- ggplot(gender_data, aes(x = gender, y = gender_counts, fill = gender)) +
   geom_bar(stat = "identity", width = 0.6, color = "white") +
   theme_minimal() +
   scale_fill_manual(values = colors) +
@@ -84,30 +75,43 @@ ggplot(gender_data, aes(x = gender, y = gender_counts, fill = gender)) +
   theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
         axis.text = element_text(size = 12),
         axis.title = element_text(size = 14, face = "bold"),
-         legend.position = "none")
+        legend.position = "none")
 
+# Plot age distribution with modified binwidth
+age_plot <- ggplot(customer_data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "#336699", color = "white") +
+  labs(x = "Age", y = "Frequency") +
+  ggtitle("Age Distribution") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14, face = "bold"))
 
-# Apply the improved theme to the Age Distribution plot
-hist(customer_data$Age,
-     col = "#336699",
-     main = "Age Distribution",
-     xlab = "Age",
-     ylab = "Frequency") + hist_theme
+# Plot annual income distribution with modified binwidth
+income_plot <- ggplot(customer_data, aes(x = Annual.Income..k..)) +
+  geom_histogram(binwidth = 10, fill = "#336699", color = "white") +
+  labs(x = "Annual Income (k)", y = "Frequency") +
+  ggtitle("Annual Income Distribution") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14, face = "bold"))
 
-# Annual Income Visualization
-hist(customer_data$Annual.Income..k..,
-     col = "#336699",
-     main = "Annual Income Distribution",
-     xlab = "Annual Income (k)",
-     ylab = "Frequency") +
-  hist_theme
+# Plot spending score distribution with modified binwidth
+score_plot <- ggplot(customer_data, aes(x = Spending.Score..1.100.)) +
+  geom_histogram(binwidth = 5, fill = "#336699", color = "white") +
+  labs(x = "Spending Score", y = "Frequency") +
+  ggtitle("Spending Score Distribution") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14, face = "bold"))
 
-# Spending Score Visualization
-hist(customer_data$Spending.Score..1.100.,
-     col = "#336699",
-     main = "Spending Score Distribution",
-     xlab = "Spending Score",
-     ylab = "Frequency") + hist_theme
+# Display the plots
+print(gender_plot)
+print(age_plot)
+print(income_plot)
+print(score_plot)
 
 
 ```

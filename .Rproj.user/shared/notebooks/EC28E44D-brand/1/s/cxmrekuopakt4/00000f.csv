@@ -1,0 +1,6 @@
+"0","extra.stop.words <- c('https')"
+"0","stopwords.df <- tibble("
+"0","  word = c(stopwords(kind = 'es'),"
+"0","           stopwords(kind = 'en'),"
+"0","           extra.stop.words)"
+"0",")"

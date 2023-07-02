@@ -1,0 +1,4 @@
+"0","tweets <- read.csv(""https://raw.githubusercontent.com/karolo89/WEBKOE/main/SatisfactionAnalysis/Tweets.csv"")%>%"
+"0","  select(-negativereason_confidence)"
+"0",""
+"0","head(tweets)"

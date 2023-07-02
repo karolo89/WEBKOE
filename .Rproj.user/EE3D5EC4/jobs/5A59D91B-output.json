@@ -1,0 +1,5 @@
+[2,"\n"]
+[1,"\r\n\r\nprocessing file: brand.qmd\r\n\r  |                                                          \r  |                                                    |   0%\r  |                                                          \r  |.....                                               |   9%                  \r  |                                                          \r  |.........                                           |  18% (unnamed-chunk-1)"]
+[1,"\r  |                                                          \r  |..............                                      |  27%                  \r  |                                                          \r  |...................                                 |  36% (unnamed-chunk-2)"]
+[1,"Quitting from lines 53-63 (brand.qmd) \r\n"]
+[1,"Error in `ask_pass()`:\r\n! Cancelled by user\r\nBacktrace:\r\n 1. rtweet::rtweet_app()\r\n 2. rtweet:::ask_pass(\"bearer token\")\r\n\r                                                                                                            \r\nExecution halted\r\n"]

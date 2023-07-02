@@ -1,0 +1,6 @@
+"0","analysis <- score.sentiment(cleanText, pos.words, neg.words)"
+"0","# Sentiment score frequency table"
+"0","score_table <- as.data.frame(table(analysis$score))"
+"0","colnames(score_table) <- c(""Sentiment Score"", ""Frequency"")"
+"0",""
+"0","score_table"

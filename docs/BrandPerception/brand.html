@@ -9,7 +9,7 @@
 <meta name="author" content="Orozco Karol M.">
 <meta name="dcterms.date" content="2023-04-20">
 
-<title>Karol M. Orozco - Brand Perception and Sentiment Analysis</title>
+<title>Karol M. Orozco - The Sky’s the Limit: Unveiling the Untold Stories of US Airline Woes on Twitter!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,8 +127,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<meta property="og:title" content="Karol M. Orozco - Brand Perception and Sentiment Analysis">
-<meta property="og:image" content="churn.jpg">
+<meta property="og:title" content="Karol M. Orozco - The Sky’s the Limit: Unveiling the Untold Stories of US Airline Woes on Twitter!">
+<meta property="og:description" content="Welcome to this sentiment analysis project in R, where I delve into the realm of major U.S. airlines and uncover the sentiments expressed by Twitter users regarding their experiences.">
+<meta property="og:image" content="transit.jpg">
 <meta property="og:site-name" content="Karol M. Orozco">
 </head>
 
@@ -182,12 +183,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction:</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#approach-and-methodology" id="toc-approach-and-methodology" class="nav-link" data-scroll-target="#approach-and-methodology">Approach and Methodology</a></li>
-  <li><a href="#data-summary" id="toc-data-summary" class="nav-link" data-scroll-target="#data-summary">Data Summary:</a></li>
-  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration:</a></li>
-  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering">Feature Engineering</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#extracting-tweets" id="toc-extracting-tweets" class="nav-link" data-scroll-target="#extracting-tweets">Extracting Tweets</a></li>
   </ul>
 </nav>
     </div>
@@ -196,11 +194,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Brand Perception and Sentiment Analysis</h1>
+<h1 class="title">The Sky’s the Limit: Unveiling the Untold Stories of US Airline Woes on Twitter!</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
-    <div class="quarto-category">Machine Learning</div>
-    <div class="quarto-category">Prediction</div>
+    <div class="quarto-category">Sentiment Analysis</div>
+    <div class="quarto-category">Brand</div>
   </div>
   </div>
 
@@ -229,50 +227,193 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction:</h2>
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Welcome to this sentiment analysis project in R, where I delve into the realm of major U.S. airlines and uncover the sentiments expressed by Twitter users regarding their experiences. By analyzing data scraped from February 2015, I aim to gain insights into the problems faced by these airlines through the eyes of their customers.</p>
+<p>The dataset used in this analysis originated from Crowdflower’s Data for Everyone library. It is available in both CSV file and SQLite database formats, providing flexibility for your preferred data exploration methods. The transformation code used to format the data can be found on GitHub, ensuring transparency and reproducibility.</p>
+<p>Within this dataset, you will find a comprehensive collection of tweets categorized based on their sentiment: positive, negative, or neutral. Additionally, negative tweets have been further classified based on the reasons provided, ranging from “late flight” to “rude service.” This granular categorization enables us to pinpoint specific problem areas faced by these airlines.</p>
+<p>Join me on this journey as we uncover the untold stories behind each major U.S. airline, unraveling the sentiments expressed by Twitter users and shedding light on the challenges faced by the industry.</p>
 </section>
 <section id="approach-and-methodology" class="level2">
 <h2 class="anchored" data-anchor-id="approach-and-methodology">Approach and Methodology</h2>
-<section id="load-the-required-packages" class="level4">
-<h4 class="anchored" data-anchor-id="load-the-required-packages">Load the required packages</h4>
+<section id="load-the-required-packages-and-data" class="level4">
+<h4 class="anchored" data-anchor-id="load-the-required-packages-and-data">Load the required packages and data</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(twitteR)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ROAuth)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hms)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkD3)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeasy)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hms)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janeaustenr)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(widyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hms)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(twitteR)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkD3)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeasy)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hms)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janeaustenr)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(widyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/karolo89/WEBKOE/main/SatisfactionAnalysis/Tweets.csv"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>negativereason_confidence)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tweets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     tweet_id airline_sentiment airline_sentiment_confidence negativereason
+1 5.70306e+17           neutral                       1.0000               
+2 5.70301e+17          positive                       0.3486               
+3 5.70301e+17           neutral                       0.6837               
+4 5.70301e+17          negative                       1.0000     Bad Flight
+5 5.70301e+17          negative                       1.0000     Can't Tell
+6 5.70301e+17          negative                       1.0000     Can't Tell
+         airline airline_sentiment_gold       name negativereason_gold
+1 Virgin America                           cairdin                    
+2 Virgin America                          jnardino                    
+3 Virgin America                        yvonnalynn                    
+4 Virgin America                          jnardino                    
+5 Virgin America                          jnardino                    
+6 Virgin America                          jnardino                    
+  retweet_count
+1             0
+2             0
+3             0
+4             0
+5             0
+6             0
+                                                                                                                                      text
+1                                                                                                      @VirginAmerica What @dhepburn said.
+2                                                                 @VirginAmerica plus you've added commercials to the experience... tacky.
+3                                                                  @VirginAmerica I didn't today... Must mean I need to take another trip!
+4           @VirginAmerica it's really aggressive to blast obnoxious "entertainment" in your guests' faces &amp;amp; they have little recourse
+5                                                                                  @VirginAmerica and it's a really big bad thing about it
+6 @VirginAmerica seriously would pay $30 a flight for seats that didn't have this playing.\nit's really the only bad thing about flying VA
+  tweet_coord   tweet_created tweet_location              user_timezone
+1             2/24/2015 11:35                Eastern Time (US &amp; Canada)
+2             2/24/2015 11:15                Pacific Time (US &amp; Canada)
+3             2/24/2015 11:15      Lets Play Central Time (US &amp; Canada)
+4             2/24/2015 11:15                Pacific Time (US &amp; Canada)
+5             2/24/2015 11:14                Pacific Time (US &amp; Canada)
+6             2/24/2015 11:14                Pacific Time (US &amp; Canada)</code></pre>
+</div>
 </div>
 </section>
 </section>
-<section id="data-summary" class="level2">
-<h2 class="anchored" data-anchor-id="data-summary">Data Summary:</h2>
-</section>
-<section id="data-exploration" class="level2">
-<h2 class="anchored" data-anchor-id="data-exploration">Data Exploration:</h2>
-</section>
-<section id="feature-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="feature-engineering">Feature Engineering</h2>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<section id="extracting-tweets" class="level2">
+<h2 class="anchored" data-anchor-id="extracting-tweets">Extracting Tweets</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extracting 4000 tweets related to global warming topic</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n.tweet <span class="ot">&lt;-</span> <span class="fu">length</span>(tweets)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># convert tweets to a data frame</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>tweets.df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(tweets)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>tweets.txt <span class="ot">&lt;-</span> tweets<span class="sc">$</span>getText</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Ignore graphical Parameters to avoid input errors</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>tweets.txt <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(tweets.txt,<span class="st">"[^[:graph:]]"</span>, <span class="st">" "</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">## pre-processing text:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>clean.text <span class="ot">=</span> <span class="cf">function</span>(x)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to lower case</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">tolower</span>(x)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove rt</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"rt"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove at</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"@</span><span class="sc">\\</span><span class="st">w+"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove punctuation</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove numbers</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"[[:digit:]]"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove links http</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"http</span><span class="sc">\\</span><span class="st">w+"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove tabs</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"[ |</span><span class="sc">\t</span><span class="st">]{2,}"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove blank spaces at the beginning</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"^ "</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove blank spaces at the end</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">" $"</span>, <span class="st">""</span>, x)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># some other cleaning text</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'https://'</span>,<span class="st">''</span>,x)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'http://'</span>,<span class="st">''</span>,x)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'[^[:graph:]]'</span>, <span class="st">' '</span>,x)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'[[:punct:]]'</span>, <span class="st">''</span>, x)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'[[:cntrl:]]'</span>, <span class="st">''</span>, x)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">d+'</span>, <span class="st">''</span>, x)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">str_replace_all</span>(x,<span class="st">"[^[:graph:]]"</span>, <span class="st">" "</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>cleanText <span class="ot">&lt;-</span> <span class="fu">clean.text</span>(tweets.txt)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co"># remove empty results (if any)</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">which</span>(cleanText <span class="sc">==</span> <span class="st">" "</span>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>cleanText <span class="ot">&lt;-</span> cleanText[cleanText <span class="sc">!=</span> <span class="st">" "</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tweets.df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    tweet_id         airline_sentiment  airline_sentiment_confidence
+ Min.   :5.676e+17   Length:14640       Min.   :0.3350              
+ 1st Qu.:5.686e+17   Class :character   1st Qu.:0.6923              
+ Median :5.695e+17   Mode  :character   Median :1.0000              
+ Mean   :5.692e+17                      Mean   :0.9002              
+ 3rd Qu.:5.699e+17                      3rd Qu.:1.0000              
+ Max.   :5.703e+17                      Max.   :1.0000              
+ negativereason       airline          airline_sentiment_gold
+ Length:14640       Length:14640       Length:14640          
+ Class :character   Class :character   Class :character      
+ Mode  :character   Mode  :character   Mode  :character      
+                                                             
+                                                             
+                                                             
+     name           negativereason_gold retweet_count          text          
+ Length:14640       Length:14640        Min.   : 0.00000   Length:14640      
+ Class :character   Class :character    1st Qu.: 0.00000   Class :character  
+ Mode  :character   Mode  :character    Median : 0.00000   Mode  :character  
+                                        Mean   : 0.08265                     
+                                        3rd Qu.: 0.00000                     
+                                        Max.   :44.00000                     
+ tweet_coord        tweet_created      tweet_location     user_timezone     
+ Length:14640       Length:14640       Length:14640       Length:14640      
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the mutate function to update 'created' column</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tweets.df <span class="ot">&lt;-</span> tweets.df <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">created =</span> tweet_created <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Remove zeros.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_remove_all</span>(<span class="at">pattern =</span> <span class="st">'</span><span class="sc">\\</span><span class="st">+0000'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Parse date.</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">parse_date_time</span>(<span class="at">orders =</span> <span class="st">'%m/%d/%Y %H:%M'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'Created_At_Round' by rounding 'created' to hours</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>tweets.df <span class="ot">&lt;-</span> tweets.df <span class="sc">%&gt;%</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Created_At_Round =</span> <span class="fu">round_date</span>(created, <span class="at">unit =</span> <span class="st">"hours"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.POSIXct</span>())</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the minimum value of 'created' column</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>min_created <span class="ot">&lt;-</span> <span class="fu">min</span>(tweets.df<span class="sc">$</span>created)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the minimum value</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(min_created)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2015-02-16 23:36:00 UTC"</code></pre>
+</div>
+</div>
 
 
 </section>

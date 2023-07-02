@@ -27,6 +27,10 @@ Join me on this journey as we uncover the untold stories behind each major U.S. 
 
 ## Approach and Methodology
 
+The first step is to gather relevant Twitter data. This typically involves utilizing the Twitter API or third-party tools to retrieve tweets based on specific keywords, hashtags, or user profiles. The collected data forms the basis for further analysis.
+
+Once the data is collected, it undergoes preprocessing to clean and prepare it for sentiment analysis. This involves removing irrelevant information such as URLs, usernames, and special characters, as well as standardizing the text by converting it to lowercase and removing stopwords.
+
 #### Load the required packages and data
 
 ```{r, warning=FALSE, message=FALSE}
@@ -336,41 +340,6 @@ analysis %>%
 ggsave("plot.png", width = 8, height = 6, dpi = 300)  # Save the plot as an image file
 ```
 
-### Barplot of sentiment type
-
-```{r}
-neutral <- length(which(analysis$score == 0))
-positive <- length(which(analysis$score > 0))
-negative <- length(which(analysis$score < 0))
-
-Sentiment <- c("Positive", "Neutral", "Negative")
-Count <- c(positive, neutral, negative)
-output <- data.frame(Sentiment, Count)
-output$Sentiment <- factor(output$Sentiment, levels = Sentiment)
-
-# Define custom color palette for business report
-business_colors <- c("#0072B2", "#009E73", "#D55E00")
-
-ggplot(output, aes(x = Sentiment, y = Count, fill = Sentiment)) +
-  geom_bar(stat = "identity") +
-  labs(x = "Sentiment", y = "Count", fill = "Sentiment") +
-  ggtitle("Distribution of Sentiment") +
-  scale_fill_manual(values = business_colors) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10),
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 10),
-    legend.position = "none",
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.border = element_blank(),
-    panel.background = element_blank()
-  )
-
-```
 
 ### Wordcloud
 

@@ -118,14 +118,18 @@ tweets.df <- tweets.df %>%
 
 # Extract the minimum value of 'created' column
 min_created <- min(tweets.df$created)
-```
 
-```{r}
 # Print the minimum value
 print(min_created)
 
 
 tweets.df %>% pull(created) %>% max()
+```
+
+
+```{r}
+write.csv(tweets.df,"C:/Users/karol/Desktop/Projects/WEBKOE/projects/BrandPerception/tweets.df", row.names=FALSE)
+
 
 ```
 

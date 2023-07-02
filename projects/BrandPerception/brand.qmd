@@ -118,9 +118,7 @@ tweets.df <- tweets.df %>%
 
 # Extract the minimum value of 'created' column
 min_created <- min(tweets.df$created)
-```
 
-```{r}
 # Print the minimum value
 print(min_created)
 

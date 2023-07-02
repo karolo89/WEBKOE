@@ -22,4 +22,6 @@
 "0","library(janeaustenr)"
 "0","library(widyr)"
 "0","library(RColorBrewer)"
+"0","library(ggeasy)"
+"0",""
 "0",""

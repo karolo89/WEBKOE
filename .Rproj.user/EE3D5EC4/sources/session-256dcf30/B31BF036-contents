@@ -54,6 +54,8 @@ library(tidyverse)
 library(janeaustenr)
 library(widyr)
 library(RColorBrewer)
+library(ggeasy)
+
 
 ```
 
@@ -68,26 +70,123 @@ str(tweets)
 
 ## Data Analysis
 
+### Data Overview
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+
+tweets <- tweets %>%
+  mutate(airline = factor(airline, levels = names(sort(table(airline), decreasing = TRUE))))
+
+ggplot(tweets) +
+  aes(airline, fill = airline) +
+  geom_bar() +
+  geom_text(stat = 'count', aes(label = paste0(round((..count..)/sum(..count..) * 100), "%")),   vjust = 1.6, color = "white") +
+  labs(title = 'Number of Tweets by Airlines', x = "", y = "") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10),
+    axis.text.y = element_text(size = 10),
+    legend.key.size = unit(0.5, "cm"),
+    legend.key.height = unit(0.5, "cm"),
+    legend.key.width = unit(0.5, "cm")
+  ) +
+  scale_fill_tableau()
+
+
+```
+
+```{r}
+
+tableau_colors <- c("#4E79A7", "#F28E2B", "#E15759", "#76B7B2", "#59A14F", "#EDC948")
+
+tweets %>%
+  group_by(airline, airline_sentiment) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(airline, count, fill = airline)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ airline_sentiment, ncol = 1) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 9)) +
+  labs(x = "Airlines", y = "Count of Tweet Sentiments") +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10),
+    axis.text.y = element_text(size = 10),
+    legend.key.size = unit(0.5, "cm"),
+    legend.key.height = unit(0.5, "cm"),
+    legend.key.width = unit(0.5, "cm")
+  ) +
+  scale_fill_manual(values = tableau_colors)
+
+
+```
+```{r}
+
+tweets %>%
+  group_by(negativereason) %>%
+  summarise(count = n(), na.rm = TRUE) %>%
+  arrange(desc(count)) %>%
+  ggplot(aes(reorder(negativereason, count), count)) +
+  geom_bar(fill = "#4E79A7", color = "black", stat = "identity") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5, size = 16),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  ) +
+  labs(x = "", y = "Count of Negative Reasons") +
+  scale_fill_manual(values = c("#4E79A7"))  # Using Tableau palette color
+
+
+
+```
+
+
+
 ### Extracting Tweets
 
 ```{r}
-library(stringr)
-
-tweets.df$text <- str_replace_all(tweets.df$text, "[^[:graph:]]", " ") %>%
-  gsub("https://", "", .) %>% 
-  gsub("rt", "", .)%>%
-  gsub("@\\w+", "", .)%>%
-  gsub("http://", "", .) %>%
-  gsub("[[:digit:]]", "", .)%>%
-  gsub("[[:punct:]]", "", .)%>%
-  gsub("[ |\t]{2,}", "", .)%>%
-  gsub("[^[:graph:]]", " ", .) %>%
-  gsub("[[:punct:]]", "", .) %>%
-  gsub("[[:cntrl:]]", "", .) %>%
-  gsub(" $", "", .)%>%
-  gsub("\\d+", "", .) %>%
-  str_replace_all(., "[^[:graph:]]", " ") %>%
-  tolower()
+tweets.df <- tweets %>%
+  mutate(text = str_replace_all(text, "[^[:graph:]]", " ") %>%
+           gsub("https://", "", .) %>% 
+           gsub("rt", "", .) %>%
+           gsub("@\\w+", "", .) %>%
+           gsub("http://", "", .) %>%
+           gsub("[[:digit:]]", "", .) %>%
+           gsub("[[:punct:]]", "", .) %>%
+           gsub("[ |\t]{2,}", "", .) %>%
+           gsub("[^[:graph:]]", " ", .) %>%
+           gsub("[[:punct:]]", "", .) %>%
+           gsub("[[:cntrl:]]", "", .) %>%
+           gsub(" $", "", .) %>%
+           gsub("\\d+", "", .) %>%
+           str_replace_all(., "[^[:graph:]]", " ") %>%
+           tolower())
 
 cleanText <- tweets.df$text
 # remove empty results (if any)
@@ -128,12 +227,6 @@ tweets.df %>% pull(created) %>% max()
 
 
 ```{r}
-write.csv(tweets.df,"C:/Users/karol/Desktop/Projects/WEBKOE/projects/BrandPerception/tweets.df", row.names=FALSE)
-
-
-```
-
-```{r}
 plt <- tweets.df %>% 
   dplyr::count(Created_At_Round) %>% 
   ggplot(mapping = aes(x = Created_At_Round, y = n)) +
@@ -148,24 +241,24 @@ ggplotly(plt)
 ### Loading sentiment word lists
 
 ```{r}
-library(textdata)
+library(tidytext)
 
-# Extract the positive word list
-words <- lexicon_bing()
+# Extract the positive and negative word lists
+words <- get_sentiments("bing")
 
-positive =words %>% filter(sentiment == "positive")
+positive <- words %>% filter(sentiment == "positive")
+negative <- words %>% filter(sentiment == "negative")
 
-negative = words %>% filter(sentiment == "negative")
+pos.words <- c(positive$word, 'upgrade', 'Congrats', 'prizes', 'prize', 'thanks', 'thnx', 'Grt', 'gr8', 'plz', 'trending', 'recovering', 'brainstorm', 'leader')
+neg.words <- c(negative$word, 'wtf', 'wait', 'waiting', 'epicfail', 'Fight', 'fighting', 'arrest', 'no', 'not')
 
-pos.words = c(lexicon_bing,'upgrade','Congrats','prizes','prize','thanks','thnx',         'Grt','gr8','plz','trending','recovering','brainstorm','leader')
-neg.words = c(negative,'wtf','wait','waiting','epicfail','Fight','fighting','arrest','no','not')
 
 ```
 
 ### Sentiment scoring function
 
 ```{r}
-score.sentiment = function(sentences, pos.words, neg.words, .progress='none')
+score.sentiment = function(sentences, pos.words, neg.words, airline, .progress='none')
 {
   require(plyr)
   require(stringr)
@@ -296,7 +389,11 @@ tdm <- as.matrix(tdm)
 tdm <- sort(rowSums(tdm), decreasing = TRUE)
 tdm <- data.frame(word = names(tdm), freq = tdm)
 
+
 set.seed(123)
+
+wordcloud(text_corpus, min.freq = 1, max.words = 100, scale = c(2.2,1),
+          colors=brewer.pal(8, "Dark2"), random.color = T, random.order = F)
 ```
 
 ### Word Frequency plot

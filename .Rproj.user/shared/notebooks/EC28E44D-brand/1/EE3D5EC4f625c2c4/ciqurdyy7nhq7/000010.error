@@ -1,0 +1,1 @@
+{"frames":[{"func":"llply(dfList, function(x) {\n    x <- subset(x, x$`19: Language` == \"English\")\n    x$tweet = x$`2: Tweet`\n    x <- x[, 22] ...","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in llply(dfList, function(x) { : object 'dfList' not found\n"}

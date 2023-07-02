@@ -1,7 +1,7 @@
 {
-  "hash": "dcc3a77113682d4207df0a9b9ea06754",
+  "hash": "5456f6defed3f85b7d695c71e55cd271",
   "result": {
-    "markdown": "---\ntitle: \"Brand Perception Survey Analysis\"\nauthor: \"Orozco Karol M.\"\nimage: churn.jpg\ndate: \"5-20-2023\"\nformat:\n  html:\n    toc: true\n    toc-location: right\n    html-math-method: katex\n    page-layout: full\nexecute: \n  warning: false\n  message: false\ncategories: [R, Machine Learning, Prediction]\n---\n\n\n## Introduction:\n\n\n## Approach and Methodology\n\n\n\n#### Load the required packages\n\n\n::: {.cell}\n\n:::\n\n\n## Data Summary:\n\n\n## Data Exploration:\n\n\n## Feature Engineering\n\n\n## Conclusion",
+    "markdown": "---\ntitle: \"Brand Perception and Sentiment Analysis\"\nauthor: \"Orozco Karol M.\"\nimage: churn.jpg\ndate: \"4-20-2023\"\nformat:\n  html:\n    toc: true\n    toc-location: right\n    html-math-method: katex\n    page-layout: full\nexecute: \n  warning: false\n  message: false\ncategories: [R, Machine Learning, Prediction]\n---\n\n\n## Introduction:\n\n## Approach and Methodology\n\n#### Load the required packages\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(twitteR)\nlibrary(ROAuth)\nlibrary(hms)\nlibrary(lubridate) \nlibrary(tidytext)\nlibrary(tm)\nlibrary(wordcloud)\nlibrary(igraph)\nlibrary(glue)\nlibrary(networkD3)\nlibrary(rtweet)\nlibrary(plyr)\nlibrary(stringr)\nlibrary(ggplot2)\nlibrary(ggeasy)\nlibrary(plotly)\nlibrary(dplyr)  \nlibrary(hms)\nlibrary(lubridate) \nlibrary(magrittr)\nlibrary(tidyverse)\nlibrary(janeaustenr)\nlibrary(widyr)\n```\n:::\n\n\n## Data Summary:\n\n## Data Exploration:\n\n## Feature Engineering\n\n## Conclusion\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"

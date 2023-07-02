@@ -23,35 +23,35 @@
   {
     "objectID": "BrandPerception/brand.html#approach-and-methodology",
     "href": "BrandPerception/brand.html#approach-and-methodology",
-    "title": "Brand Perception Survey Analysis",
+    "title": "Brand Perception and Sentiment Analysis",
     "section": "Approach and Methodology",
-    "text": "Approach and Methodology\n\nLoad the required packages"
+    "text": "Approach and Methodology\n\nLoad the required packages\n\nlibrary(twitteR)\nlibrary(ROAuth)\nlibrary(hms)\nlibrary(lubridate) \nlibrary(tidytext)\nlibrary(tm)\nlibrary(wordcloud)\nlibrary(igraph)\nlibrary(glue)\nlibrary(networkD3)\nlibrary(rtweet)\nlibrary(plyr)\nlibrary(stringr)\nlibrary(ggplot2)\nlibrary(ggeasy)\nlibrary(plotly)\nlibrary(dplyr)  \nlibrary(hms)\nlibrary(lubridate) \nlibrary(magrittr)\nlibrary(tidyverse)\nlibrary(janeaustenr)\nlibrary(widyr)"
   },
   {
     "objectID": "BrandPerception/brand.html#data-summary",
     "href": "BrandPerception/brand.html#data-summary",
-    "title": "Brand Perception Survey Analysis",
+    "title": "Brand Perception and Sentiment Analysis",
     "section": "Data Summary:",
     "text": "Data Summary:"
   },
   {
     "objectID": "BrandPerception/brand.html#data-exploration",
     "href": "BrandPerception/brand.html#data-exploration",
-    "title": "Brand Perception Survey Analysis",
+    "title": "Brand Perception and Sentiment Analysis",
     "section": "Data Exploration:",
     "text": "Data Exploration:"
   },
   {
     "objectID": "BrandPerception/brand.html#feature-engineering",
     "href": "BrandPerception/brand.html#feature-engineering",
-    "title": "Brand Perception Survey Analysis",
+    "title": "Brand Perception and Sentiment Analysis",
     "section": "Feature Engineering",
     "text": "Feature Engineering"
   },
   {
     "objectID": "BrandPerception/brand.html#conclusion",
     "href": "BrandPerception/brand.html#conclusion",
-    "title": "Brand Perception Survey Analysis",
+    "title": "Brand Perception and Sentiment Analysis",
     "section": "Conclusion",
     "text": "Conclusion"
   },
@@ -109,7 +109,7 @@
     "href": "portfolio.html",
     "title": "Portfolio",
     "section": "",
-    "text": "Market Segmentation Analysis\n\n\n\n\n\n\n\nR\n\n\nMachine Learning\n\n\nPrediction\n\n\n\n\n\n\n\n\n\n\n\nJune 30, 2023\n\n\nOrozco Karol M.\n\n\n8 min\n\n\n\n\n\n\n  \n\n\n\n\nCustomer Churn Prediction\n\n\n\n\n\n\n\nR\n\n\nMachine Learning\n\n\nPrediction\n\n\n\n\n\n\n\n\n\n\n\nMarch 11, 2023\n\n\nOrozco Karol M.\n\n\n9 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Market Segmentation Analysis\n\n\n\n\n\n\n\nR\n\n\nUnsupervised Learning\n\n\nCluster Analysis\n\n\n\n\n\n\n\n\n\n\n\nJune 30, 2023\n\n\nOrozco Karol M.\n\n\n8 min\n\n\n\n\n\n\n  \n\n\n\n\nCustomer Churn Prediction\n\n\n\n\n\n\n\nR\n\n\nMachine Learning\n\n\nPrediction\n\n\n\n\n\n\n\n\n\n\n\nMarch 11, 2023\n\n\nOrozco Karol M.\n\n\n9 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/Churners/churners.html",

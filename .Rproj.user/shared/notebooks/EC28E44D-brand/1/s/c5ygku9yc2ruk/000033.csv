@@ -1,0 +1,8 @@
+"0",""
+"0","n.tweet <- length(tweets)"
+"2","Error in exists(cacheKey, where = .rs.WorkingDataEnv, inherits = FALSE) : 
+  invalid first argument
+"
+"0","tweets.txt <- sapply(tweets, function(t)t$getText())"
+"2","Error in t$getText : $ operator is invalid for atomic vectors
+"

@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <meta property="og:title" content="Karol M. Orozco - What Percentage of Children Live Beyond Their Fifth Birthday?">
-<meta property="og:description" content="The rate of child mortality is at its lowest point ever. From 12.5 million in 1990 to 5.2 million in 2019, child mortality has more than halved in less than three decades.">
+<meta property="og:description" content="The global rate of child mortality has reached its lowest point in history, marking a remarkable achievement in the realm of public health.">
 <meta property="og:image" content="child_mortality.png">
 <meta property="og:site-name" content="Karol M. Orozco">
 </head>
@@ -216,7 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link active" data-scroll-target="#data-wrangling">Data Wrangling</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#understanding-the-sustainable-development-goals-sdgs" id="toc-understanding-the-sustainable-development-goals-sdgs" class="nav-link" data-scroll-target="#understanding-the-sustainable-development-goals-sdgs">Understanding the Sustainable Development Goals (SDGs)</a></li>
+  <li><a href="#analyzing-the-data" id="toc-analyzing-the-data" class="nav-link" data-scroll-target="#analyzing-the-data">Analyzing the Data</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data Wrangling</a></li>
+  <li><a href="#plotting-the-data" id="toc-plotting-the-data" class="nav-link" data-scroll-target="#plotting-the-data">Plotting the Data</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
   </ul>
 </nav>
     </div>
@@ -226,9 +232,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>The rate of child mortality is at its lowest point ever. From 12.5 million in 1990 to 5.2 million in 2019, child mortality has more than halved in less than three decades. It is essential to recognize this significant accomplishment.</p>
-<p>Nations committed to achieving Sustainable Development Goals (SDGs). By 2030, all countries must achieve at least a 2.5% child mortality rate. This would imply that regardless of where a baby is born, more than 97.5% survive the first five years of their existence. Currently, 3.9% of children worldwide die before turning five, equating to an average of 15,000 deaths per day.</p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>The global rate of child mortality has reached its lowest point in history, marking a remarkable achievement in the realm of public health. Over the past three decades, child mortality has more than halved, dropping from 12.5 million in 1990 to 5.2 million in 2019. This significant progress deserves recognition and highlights the collective efforts made by nations worldwide. In this article, we delve into the topic of child mortality, explore the current statistics, and discuss the importance of ensuring the survival of our future generations.</p>
 <p><img src="child_mortality.png" class="img-fluid"></p>
+</section>
+<section id="understanding-the-sustainable-development-goals-sdgs" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-sustainable-development-goals-sdgs">Understanding the Sustainable Development Goals (SDGs)</h3>
+<p>As part of the Sustainable Development Goals (SDGs), all countries have committed to achieving a child mortality rate of at least 2.5% by 2030. This means that irrespective of their birthplace, more than 97.5% of children should survive beyond their fifth birthday. However, the reality is that 3.9% of children globally still face the tragic fate of dying before reaching this milestone. This equates to an average of 15,000 child deaths every day, highlighting the urgent need for further action.</p>
+</section>
+<section id="analyzing-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-the-data">Analyzing the Data</h3>
+<p>To gain insights into child mortality rates, we analyzed data from various years, including 1800, 1900, and 2020. The dataset reveals the percentage of children who do not survive beyond their fifth birthday. By visualizing the data, we can better comprehend the progress made and identify areas that require additional attention.</p>
+</section>
+<section id="data-wrangling" class="level3">
+<h3 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h3>
+<p>To conduct our analysis, we employed various data wrangling techniques using R programming language. We utilized libraries such as tidyverse, showtext, and emojifont to preprocess and visualize the data effectively.</p>
+</section>
+<section id="plotting-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-the-data">Plotting the Data</h3>
+<p>Through the use of ggplot2, a popular data visualization package in R, we created a visually appealing plot that showcases the child mortality rates over time. The plot employs a grid layout, with each grid representing a specific year. Within each grid, we display icons of individuals, where each icon represents a child. The icons are color-coded to differentiate between children who survive and those who perish before the age of five. The plot provides a striking visual representation of the progress made and the work that lies ahead.</p>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>The decline in child mortality rates is a testament to the collective efforts of governments, organizations, and individuals working towards the well-being of children worldwide. However, the battle is far from over. We must continue our relentless pursuit of ensuring that every child has the opportunity to thrive and contribute to our society. By investing in healthcare, education, and social support systems, we can strive to achieve the Sustainable Development Goals and secure a brighter future for all children.</p>
+<p>As we move forward, let us remember that behind each statistic lies a precious life, a potential future leader, and a source of boundless possibilities. Together, we can make a difference and create a world where every child lives beyond their fifth birthday, paving the way for a healthier, happier, and more prosperous future.</p>
 <section id="load-the-required-packages-and-dataset" class="level4">
 <h4 class="anchored" data-anchor-id="load-the-required-packages-and-dataset">Load the required packages and dataset</h4>
 <div class="cell">
@@ -238,8 +266,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-wrangling" class="level3">
-<h3 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h3>
+</section>
+<section id="code" class="level3">
+<h3 class="anchored" data-anchor-id="code">Code</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load fonts</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="st">"Roboto Slab"</span>, <span class="st">"slab"</span>)</span>

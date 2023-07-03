@@ -1,0 +1,36 @@
+---
+title: "Customer Lifetime Value (CLV) Analysis"
+author: "Orozco Karol M."
+image: churn.jpg
+date: "3-11-2023"
+format:
+  html:
+    toc: true
+    toc-location: right
+    html-math-method: katex
+    page-layout: full
+execute: 
+  warning: false
+  message: false
+categories: [R, Machine Learning, Prediction]
+---
+
+## Introduction:
+
+ I conducted a CLV analysis for a subscription-based business to estimate the long-term value of customers. The analysis involved data preparation, calculation of customer lifetime value using different models (e.g., RFM analysis, cohort analysis), and visualization of results to identify high-value customer segments.
+
+## Approach and Methodology
+
+#### Load the required packages
+
+```{r}
+
+```
+
+## Data Summary:
+
+## Data Exploration:
+
+## Feature Engineering
+
+## Conclusion

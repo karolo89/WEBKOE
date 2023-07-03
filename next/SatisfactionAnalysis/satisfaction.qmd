@@ -1,0 +1,41 @@
+---
+title: "Customer Satisfaction Analysis"
+author: "Orozco Karol M."
+image: churn.jpg
+date: "3-11-2023"
+format:
+  html:
+    toc: true
+    toc-location: right
+    html-math-method: katex
+    page-layout: full
+execute: 
+  warning: false
+  message: false
+categories: [R, Machine Learning, Prediction]
+---
+
+## Introduction:
+
+I conducted a customer satisfaction analysis for a service-based organization to assess customer satisfaction levels and identify areas for improvement. The analysis involved data cleaning, calculation of satisfaction scores, statistical analysis (e.g., t-tests, ANOVA) to identify significant differences, and visualization of results using charts and graphs.
+
+## Approach and Methodology
+
+
+
+#### Load the required packages
+
+```{r}
+
+```
+
+## Data Summary:
+
+
+## Data Exploration:
+
+
+## Feature Engineering
+
+
+## Conclusion

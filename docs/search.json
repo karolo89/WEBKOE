@@ -292,5 +292,89 @@
     "title": "The Sky’s the Limit: Unveiling the Untold Stories of US Airline Woes on Twitter!",
     "section": "Network Analysis",
     "text": "Network Analysis\n\nBigram analysis and Network definition\nBigram counts pairwise occurrences of words which appear together in the text.\n\n#bigram\nbi.gram.words <- tweets.df %>% \n  unnest_tokens(\n    input = text, \n    output = bigram, \n    token = 'ngrams', \n    n = 2\n  ) %>% \n  filter(! is.na(bigram))\n\nbi.gram.words %>% \n  select(bigram) %>% \n  head(10)\n\n              bigram\n1         plus youve\n2        youve added\n3  added commercials\n4     commercials to\n5             to the\n6     the experience\n7   experience tacky\n8            i didnt\n9        didnt today\n10        today must\n\n\n\nextra.stop.words <- c('https')\nstopwords.df <- tibble(\n  word = c(stopwords(kind = 'es'),\n           stopwords(kind = 'en'),\n           extra.stop.words)\n)\n\nNext, we filter for stop words and remove white spaces.\n\nbi.gram.words %<>% \n  separate(col = bigram, into = c('word1', 'word2'), sep = ' ') %>% \n  filter(! word1 %in% stopwords.df$word) %>% \n  filter(! word2 %in% stopwords.df$word) %>% \n  filter(! is.na(word1)) %>% \n  filter(! is.na(word2)) \n\nFinally, we group and count by bigram.\n\nbi.gram.count <- bi.gram.words %>% \n  dplyr::count(word1, word2, sort = TRUE) %>% \n  dplyr::rename(weight = n)\n\nbi.gram.count %>% head()\n\n      word1     word2 weight\n1  customer   service    526\n2 cancelled flightled    451\n3      late    flight    232\n4 cancelled  flighted    202\n5   booking  problems    142\n6      late   flightr    142\n\n\nLet us plot the distribution of the weightvalues:\n\n## Note that it is very skewed, for visualization purposes it might be a good idea to perform a transformation, eg log transform:\n\nbi.gram.count %>% \n  mutate(weight = log(weight + 1)) %>% \n  ggplot(mapping = aes(x = weight)) +\n  theme_light() +\n  geom_histogram(fill = \"#2171b5\") +\n  labs(title = \"Bigram log-Weight Distribution\")+\n  theme_minimal()\n\n\n\n\n\n\nNetwork visualization\n\nthreshold <- 50\n\n# For visualization purposes we scale by a global factor. \nScaleWeight <- function(x, lambda) {\n  x / lambda\n}\n\nnetwork <-  bi.gram.count %>%\n  filter(weight > threshold) %>%\n  mutate(weight = ScaleWeight(x = weight, lambda = 2E3)) %>% \n  graph_from_data_frame(directed = FALSE)\n\nplot(\n  network, \n  vertex.size = 1,\n  vertex.label.color = 'black', \n  vertex.label.cex = 0.7, \n  vertex.label.dist = 1,\n  edge.color = 'gray', \n  main = 'Bigram Count Network', \n  sub = glue('Weight Threshold: {threshold}'), \n  alpha = 50\n)\n\n\n\n\nWe can go a step further and make our visualization more dynamic using the networkD3 library.\n\nthreshold <- 50\n\nnetwork <-  bi.gram.count %>%\n  filter(weight > threshold) %>%\n  graph_from_data_frame(directed = FALSE)\n\n# Store the degree.\nV(network)$degree <- strength(graph = network)\n# Compute the weight shares.\nE(network)$width <- E(network)$weight/max(E(network)$weight)\n\n# Create networkD3 object.\nnetwork.D3 <- igraph_to_networkD3(g = network)\n# Define node size.\nnetwork.D3$nodes %<>% mutate(Degree = (1E-2)*V(network)$degree)\n# Define color group\nnetwork.D3$nodes %<>% mutate(Group = 1)\n# Define edges width. \nnetwork.D3$links$Width <- 10*E(network)$width\n\nforceNetwork(\n  Links = network.D3$links, \n  Nodes = network.D3$nodes, \n  Source = 'source', \n  Target = 'target',\n  NodeID = 'name',\n  Group = 'Group', \n  opacity = 0.9,\n  Value = 'Width',\n  Nodesize = 'Degree', \n  # We input a JavaScript function.\n  linkWidth = JS(\"function(d) { return Math.sqrt(d.value); }\"), \n  fontSize = 12,\n  zoom = TRUE, \n  opacityNoHover = 1\n)\n\n\n\n\n\n\n\nReferences:\nBing Liu, Minqing Hu and Junsheng Cheng. “Opinion Observer: Analyzing and Comparing Opinions on the Web.” Proceedings of the 14th International World Wide Web conference (WWW-2005), May 10-14, 2005, Chiba, Japan."
+  },
+  {
+    "objectID": "next/CLVAnalysis/CustomerLifetimeValue.html",
+    "href": "next/CLVAnalysis/CustomerLifetimeValue.html",
+    "title": "Customer Lifetime Value (CLV) Analysis",
+    "section": "",
+    "text": "I conducted a CLV analysis for a subscription-based business to estimate the long-term value of customers. The analysis involved data preparation, calculation of customer lifetime value using different models (e.g., RFM analysis, cohort analysis), and visualization of results to identify high-value customer segments."
+  },
+  {
+    "objectID": "next/CLVAnalysis/CustomerLifetimeValue.html#approach-and-methodology",
+    "href": "next/CLVAnalysis/CustomerLifetimeValue.html#approach-and-methodology",
+    "title": "Customer Lifetime Value (CLV) Analysis",
+    "section": "Approach and Methodology",
+    "text": "Approach and Methodology\n\nLoad the required packages"
+  },
+  {
+    "objectID": "next/CLVAnalysis/CustomerLifetimeValue.html#data-summary",
+    "href": "next/CLVAnalysis/CustomerLifetimeValue.html#data-summary",
+    "title": "Customer Lifetime Value (CLV) Analysis",
+    "section": "Data Summary:",
+    "text": "Data Summary:"
+  },
+  {
+    "objectID": "next/CLVAnalysis/CustomerLifetimeValue.html#data-exploration",
+    "href": "next/CLVAnalysis/CustomerLifetimeValue.html#data-exploration",
+    "title": "Customer Lifetime Value (CLV) Analysis",
+    "section": "Data Exploration:",
+    "text": "Data Exploration:"
+  },
+  {
+    "objectID": "next/CLVAnalysis/CustomerLifetimeValue.html#feature-engineering",
+    "href": "next/CLVAnalysis/CustomerLifetimeValue.html#feature-engineering",
+    "title": "Customer Lifetime Value (CLV) Analysis",
+    "section": "Feature Engineering",
+    "text": "Feature Engineering"
+  },
+  {
+    "objectID": "next/CLVAnalysis/CustomerLifetimeValue.html#conclusion",
+    "href": "next/CLVAnalysis/CustomerLifetimeValue.html#conclusion",
+    "title": "Customer Lifetime Value (CLV) Analysis",
+    "section": "Conclusion",
+    "text": "Conclusion"
+  },
+  {
+    "objectID": "next/SatisfactionAnalysis/satisfaction.html",
+    "href": "next/SatisfactionAnalysis/satisfaction.html",
+    "title": "Customer Satisfaction Analysis",
+    "section": "",
+    "text": "I conducted a customer satisfaction analysis for a service-based organization to assess customer satisfaction levels and identify areas for improvement. The analysis involved data cleaning, calculation of satisfaction scores, statistical analysis (e.g., t-tests, ANOVA) to identify significant differences, and visualization of results using charts and graphs."
+  },
+  {
+    "objectID": "next/SatisfactionAnalysis/satisfaction.html#approach-and-methodology",
+    "href": "next/SatisfactionAnalysis/satisfaction.html#approach-and-methodology",
+    "title": "Customer Satisfaction Analysis",
+    "section": "Approach and Methodology",
+    "text": "Approach and Methodology\n\nLoad the required packages"
+  },
+  {
+    "objectID": "next/SatisfactionAnalysis/satisfaction.html#data-summary",
+    "href": "next/SatisfactionAnalysis/satisfaction.html#data-summary",
+    "title": "Customer Satisfaction Analysis",
+    "section": "Data Summary:",
+    "text": "Data Summary:"
+  },
+  {
+    "objectID": "next/SatisfactionAnalysis/satisfaction.html#data-exploration",
+    "href": "next/SatisfactionAnalysis/satisfaction.html#data-exploration",
+    "title": "Customer Satisfaction Analysis",
+    "section": "Data Exploration:",
+    "text": "Data Exploration:"
+  },
+  {
+    "objectID": "next/SatisfactionAnalysis/satisfaction.html#feature-engineering",
+    "href": "next/SatisfactionAnalysis/satisfaction.html#feature-engineering",
+    "title": "Customer Satisfaction Analysis",
+    "section": "Feature Engineering",
+    "text": "Feature Engineering"
+  },
+  {
+    "objectID": "next/SatisfactionAnalysis/satisfaction.html#conclusion",
+    "href": "next/SatisfactionAnalysis/satisfaction.html#conclusion",
+    "title": "Customer Satisfaction Analysis",
+    "section": "Conclusion",
+    "text": "Conclusion"
   }
 ]

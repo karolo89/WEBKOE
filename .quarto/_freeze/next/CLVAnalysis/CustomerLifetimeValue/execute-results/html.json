@@ -1,0 +1,14 @@
+{
+  "hash": "c23ef3087137c438be3577b851b36c14",
+  "result": {
+    "markdown": "---\ntitle: \"Customer Lifetime Value (CLV) Analysis\"\nauthor: \"Orozco Karol M.\"\nimage: churn.jpg\ndate: \"3-11-2023\"\nformat:\n  html:\n    toc: true\n    toc-location: right\n    html-math-method: katex\n    page-layout: full\nexecute: \n  warning: false\n  message: false\ncategories: [R, Machine Learning, Prediction]\n---\n\n\n## Introduction:\n\n I conducted a CLV analysis for a subscription-based business to estimate the long-term value of customers. The analysis involved data preparation, calculation of customer lifetime value using different models (e.g., RFM analysis, cohort analysis), and visualization of results to identify high-value customer segments.\n\n## Approach and Methodology\n\n#### Load the required packages\n\n\n::: {.cell}\n\n:::\n\n\n## Data Summary:\n\n## Data Exploration:\n\n## Feature Engineering\n\n## Conclusion\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

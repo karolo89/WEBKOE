@@ -59,5 +59,11 @@
   },
   "SatisfactionAnalysis/satisfaction.qmd": {
     "satisfaction.html": "25ccabf0"
+  },
+  "next/CLVAnalysis/CustomerLifetimeValue.qmd": {
+    "CustomerLifetimeValue.html": "19b4a4c4"
+  },
+  "next/SatisfactionAnalysis/satisfaction.qmd": {
+    "satisfaction.html": "d302eaab"
   }
 }

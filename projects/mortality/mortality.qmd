@@ -1,5 +1,5 @@
 ---
-title: "What Percentage of Children Live Beyond Their Fifth Birthday?"
+title: "Child Mortality Rates Continue to Decline: Ensuring the Survival of Our Future Generations"
 author: "Orozco Karol M."
 date: "06-30-2023"
 image: child_mortality.png

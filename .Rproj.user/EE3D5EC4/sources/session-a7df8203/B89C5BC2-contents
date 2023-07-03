@@ -12,8 +12,10 @@ format:
 execute: 
   warning: false
   message: false
-categories: [R, Unsupervised Learning, Cluster Analysis]
+categories: [R, Data Viz, Data For Good]
+
 ---
+![](child_mortality.png)
 
 The rate of child mortality is at its lowest point ever. From 12.5 million in 1990 to 5.2 million in 2019, child mortality has more than halved in less than three decades. It is essential to recognize this significant accomplishment.
 
@@ -28,7 +30,7 @@ library(usefunc)
 library(showtext)
 ```
 
-
+### Data Wrangling
 
 ```{r}
 
@@ -92,6 +94,4 @@ p <- ggplot() +
 # Adjust figure size and save as PNG
 ggsave("child_mortality.png", p, width = 10, height = 6, dpi = 300)
 
-
-p
 ```

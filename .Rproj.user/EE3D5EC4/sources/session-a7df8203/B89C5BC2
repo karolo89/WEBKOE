@@ -3,7 +3,7 @@
     "path": "C:/Users/karol/Desktop/Projects/WEBKOE/projects/mortality/mortality.qmd",
     "project_path": "projects/mortality/mortality.qmd",
     "type": "quarto_markdown",
-    "hash": "312096110",
+    "hash": "4040834654",
     "contents": "",
     "dirty": false,
     "created": 1688408535798.0,
@@ -17,15 +17,15 @@
         "docOutlineVisible": "0",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "1095:86.54545593261719",
-        "cursorPosition": "15,0",
-        "scrollLine": "10"
+        "cursorPosition": "24,0",
+        "scrollLine": "17"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688410435,
+    "lastKnownWriteTime": 1688410566,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688410435548,
+    "last_content_update": 1688410566323,
     "read_only": false,
     "read_only_alternatives": []
 }

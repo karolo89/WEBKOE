@@ -65,5 +65,11 @@
   },
   "next/SatisfactionAnalysis/satisfaction.qmd": {
     "satisfaction.html": "d302eaab"
+  },
+  "projects/ChildMortality/childMortality.qmd": {
+    "childMortality.html": "da42ccfb"
+  },
+  "projects/mortality/mortality.qmd": {
+    "mortality.html": "9ab503da"
   }
 }

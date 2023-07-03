@@ -1,6 +1,0 @@
-"0","bi.gram.words %<>% "
-"0","  separate(col = bigram, into = c('word1', 'word2'), sep = ' ') %>% "
-"0","  filter(! word1 %in% stopwords.df$word) %>% "
-"0","  filter(! word2 %in% stopwords.df$word) %>% "
-"0","  filter(! is.na(word1)) %>% "
-"0","  filter(! is.na(word2)) "

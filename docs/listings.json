@@ -9,8 +9,8 @@
   {
     "listing": "/portfolio.html",
     "items": [
+      "/projects/ChildMortality/mortality.html",
       "/projects/MarketSegmentation/segmentation.html",
-      "/projects/mortality/mortality.html",
       "/projects/BrandPerception/brand.html",
       "/projects/Churners/churners.html"
     ]

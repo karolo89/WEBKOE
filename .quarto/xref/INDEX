@@ -101,5 +101,8 @@
   },
   "projects/Data_viz_others/Hurricanes/hurricane.qmd": {
     "hurricane.html": "268f4643"
+  },
+  "projects/Data_viz_others/vote/vote.qmd": {
+    "vote.html": "5565727a"
   }
 }

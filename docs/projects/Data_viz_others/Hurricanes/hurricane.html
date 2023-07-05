@@ -9,7 +9,7 @@
 <meta name="author" content="Karol Orozco">
 <meta name="dcterms.date" content="2023-02-05">
 
-<title>Karol M. Orozco - Hurricanes</title>
+<title>Karol M. Orozco - Recreating the Graph: Analyzing the Impact of Hurricane Seasons on Future Predictions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,8 +127,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<meta property="og:title" content="Karol M. Orozco - Hurricanes">
-<meta property="og:description" content="Hello there,">
+<meta property="og:title" content="Karol M. Orozco - Recreating the Graph: Analyzing the Impact of Hurricane Seasons on Future Predictions">
+<meta property="og:description" content="In this article, we will dive into the process of recreating a graph from the informative article titled “Why Past Hurricane Seasons Don’t Tell Us Much About The Future” by Anna Wiederkehr.">
 <meta property="og:image" content="hurricane.png">
 <meta property="og:site-name" content="Karol M. Orozco">
 </head>
@@ -192,8 +192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">Hurricanes</h1>
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Recreating the Graph: Analyzing the Impact of Hurricane Seasons on Future Predictions</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
                 <div class="quarto-category">Data Viz</div>
@@ -226,19 +226,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-source-and-preparation" id="toc-data-source-and-preparation" class="nav-link" data-scroll-target="#data-source-and-preparation">Data Source and Preparation</a></li>
+  <li><a href="#graph-creation" id="toc-graph-creation" class="nav-link" data-scroll-target="#graph-creation">Graph Creation</a></li>
+  <li><a href="#graph-features" id="toc-graph-features" class="nav-link" data-scroll-target="#graph-features">Graph Features</a></li>
+  <li><a href="#graph-customization" id="toc-graph-customization" class="nav-link" data-scroll-target="#graph-customization">Graph Customization</a></li>
+  <li><a href="#footer" id="toc-footer" class="nav-link" data-scroll-target="#footer">Footer</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
-<p>Hello there,</p>
-<p>Today, I will be recreating the graph from the article <a href="https://fivethirtyeight.com/features/why-past-hurricane-seasons-dont-tell-us-much-about-the-future/">“Why Past Hurricane Seasons Don’t Tell Us Much About The Future”</a> by Anna Wiederkehr.</p>
-<p>You can find the raw data in the National Oceanic and Atmospheric Administration’s HURDAT2 database, which has records of all Atlantic basin tropical cyclones dating back to 1851.</p>
-<p>This exercise focuses on practicing our data visualization skills with ggplot2, so I’ll skip the data manipulation steps. You can find the dataset for the graph in my GitHub repository.</p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>In this article, we will dive into the process of recreating a graph from the informative article titled “Why Past Hurricane Seasons Don’t Tell Us Much About The Future” by Anna Wiederkehr. The original article, published on FiveThirtyEight, explores the limitations of using past hurricane seasons to predict future patterns. Our focus will be on practicing our data visualization skills using the powerful ggplot2 library in R.</p>
+</section>
+<section id="data-source-and-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-source-and-preparation">Data Source and Preparation</h3>
+<p>To recreate the graph, we need the raw data from the National Oceanic and Atmospheric Administration’s (NOAA) HURDAT2 database. This database contains records of all Atlantic basin tropical cyclones dating back to 1851. For simplicity, we skip the data manipulation steps and provide the dataset in our GitHub repository.</p>
+</section>
+<section id="graph-creation" class="level3">
+<h3 class="anchored" data-anchor-id="graph-creation">Graph Creation</h3>
+<p>We start by loading the necessary libraries and fetching the dataset from our GitHub repository using RCurl. Once the data is imported, we can proceed with creating the graph using ggplot2. The graph showcases the 15-year average recorded Atlantic basin hurricanes from 1851 to 2019.</p>
+</section>
+<section id="graph-features" class="level3">
+<h3 class="anchored" data-anchor-id="graph-features">Graph Features</h3>
+<p>The graph is constructed using geom_step to represent the average hurricane count over time. Additionally, we include text annotations to indicate different types of hurricanes, such as “All Hurricanes” and “Major Hurricanes.” The graph is color-coded to differentiate between different hurricane types using hex colors obtained from the original graph using the Image Color Picker tool.</p>
+</section>
+<section id="graph-customization" class="level3">
+<h3 class="anchored" data-anchor-id="graph-customization">Graph Customization</h3>
+<p>To enhance the visual appeal, we customize various aspects of the graph. This includes adjusting scales for the x and y axes, removing gridlines, modifying axis ticks and lines, and applying a minimal theme. The title of the graph, “15-year average recorded Atlantic basin hurricanes, 1851-2019,” provides a clear indication of the data presented.</p>
+</section>
+<section id="footer" class="level3">
+<h3 class="anchored" data-anchor-id="footer">Footer</h3>
+<p>To complete the recreation, we add a footer displaying the source of the data and attribution. The footer consists of the text “FiveThirtyEight” and “SOURCES: HURDAT2, VECCHI ET AL” aligned at the bottom of the graph.</p>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>By following the step-by-step process outlined in this article, we successfully recreated the graph from Anna Wiederkehr’s insightful article on hurricane seasons. Through the use of ggplot2 and various customization techniques, we were able to visualize the 15-year average recorded Atlantic basin hurricanes from 1851 to 2019. This exercise serves as an excellent opportunity to enhance our data visualization skills and gain insights into the impact of past hurricane seasons on future predictions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## library(ggplot2)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## library(geomtextpath)</span></span>
@@ -341,8 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="hurricane_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Note: The recreated graph is displayed in the article, but please refer to the original article on FiveThirtyEight for a more detailed analysis and interpretation of the data.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

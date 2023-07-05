@@ -1,14 +1,14 @@
 {
-    "id": "CB03D711",
-    "path": "C:/Users/karol/Desktop/Projects/WEBKOE/projects/Data_viz_others/Hurricanes/hurricane.qmd",
-    "project_path": "projects/Data_viz_others/Hurricanes/hurricane.qmd",
+    "id": "ECC5BCE4",
+    "path": "C:/Users/karol/Desktop/Projects/WEBKOE/projects/Data_viz_others/vote/vote.qmd",
+    "project_path": "projects/Data_viz_others/vote/vote.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "408536084",
     "contents": "",
     "dirty": false,
-    "created": 1688581041785.0,
+    "created": 1688582751387.0,
     "source_on_save": true,
-    "relative_order": 3,
+    "relative_order": 2,
     "properties": {
         "rmdVisualMode": "false",
         "rmdVisualWrapConfigured": "true",
@@ -16,15 +16,16 @@
         "Source": "Source",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "cursorPosition": "7,13",
-        "scrollLine": "0"
+        "cursorPosition": "189,0",
+        "scrollLine": "172",
+        "rmdVisualModeLocation": "2:0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688581113,
+    "lastKnownWriteTime": 1688582919,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688581113503,
+    "last_content_update": 1688582919533,
     "read_only": false,
     "read_only_alternatives": []
 }

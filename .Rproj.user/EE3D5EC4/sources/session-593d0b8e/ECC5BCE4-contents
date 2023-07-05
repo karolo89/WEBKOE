@@ -1,0 +1,189 @@
+---
+title: "Analyzing the Impact of the Pandemic on Voter Registrations: Recreating the Graph from FiveThirtyEight"
+author: "Karol Orozco"
+date: 03/6/2020
+image: "hurricane.png"
+format:
+  html:
+    toc: true
+    toc-location: right
+    html-math-method: katex
+    page-layout: full
+execute: 
+  warning: false
+  message: false
+categories: [R, Data Viz, Data For Good]
+---
+
+### Introduction
+
+In this report, we will explore the changes in voter registrations during the pandemic by recreating the graph from the article "Voter Registrations Are Way, Way Down During The Pandemic" by FiveThirtyEight. The graph presents the difference in the number of newly registered voters for each month in 2020 compared to the same month in 2016. We will utilize ggplot2 and visual storytelling techniques to convey the insights effectively.
+
+### Data and Libraries
+
+To recreate the graph, we will use the voter registration data from the "new-voter-registrations.csv" file provided by FiveThirtyEight. The dataset contains information about new voter registrations across different jurisdictions and months. We will employ the tidyverse and scales libraries to handle data manipulation and visualization tasks.
+
+### Visualization Process
+We will begin by loading the necessary libraries and importing the voter registration dataset. Next, we will preprocess the data, including leveling the Month variable and spreading the years into separate columns. We will calculate the change in voter registrations between 2020 and 2016 and assign colors to indicate positive and negative changes.
+
+Using ggplot2, we will create a column chart to represent the change in voter registrations for each month. Additionally, we will include a horizontal line at zero to indicate no change. To provide context, we will add dotted rectangles for specific jurisdictions, such as Arizona, California, Colorado, Delaware, Florida, Georgia, and Illinois.
+
+To enhance the visualization, we will apply specific aesthetics and scales. The fill color of the columns will represent positive and negative changes, and we will customize the x-axis labels and breaks. The y-axis labels will be formatted using the label_number_si function for improved readability. The graph will be faceted by jurisdiction to allow for easy comparison.
+
+### Conclusion
+
+The recreated graph effectively illustrates the significant drop in voter registrations during the pandemic. It provides a clear visual representation of the difference in newly registered voters for each month in 2020 compared to 2016. The graph helps convey the impact of the pandemic on voter participation and highlights the states that experienced the most significant changes.
+
+The report concludes by acknowledging the data sources and providing a caption that explains the treatment of voters who move between counties within a state. The graph is presented in the style of FiveThirtyEight, aligning with their visual storytelling approach.
+
+Overall, this exercise showcases the power of data visualization using ggplot2 and demonstrates the impact of the pandemic on voter registrations, as portrayed in the original FiveThirtyEight article.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+
+library(tidytuesdayR)
+library(tidyverse)
+library(scales)
+
+#load data
+
+# Import data 
+vreg<-read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/voter-registration/new-voter-registrations.csv",
+header=TRUE)
+
+# Level the Month variable so that its in the right order (ie not alphabetical)
+vreg$Month<-factor(vreg$Month,
+levels=c("Jan", "Feb", "Mar", "Apr", "May"))
+
+### USE spread() FROM tidyr
+vreg<-vreg%>%
+spread(Year, New.registered.voters)
+
+### RENAME THE COLUMNS
+colnames(vreg)<-c("Jurisdiction", "Month", "Y2016", "Y2020")
+
+### mutate() FROM dplyr()
+vreg<-vreg%>%
+mutate(change= Y2020-Y2016)%>%
+  mutate(Color = ifelse(change > 0,"#48E5E8", "#F56C6A"))
+
+a<- function(change){number_format(accuracy = 1,
+                                  scale = 1/1000,
+                                  suffix = "K")(change)}
+
+
+```
+
+```{r}
+
+
+ggplot(vreg, aes(x= Month, y= change, fill = Color))+
+geom_col()+ 
+geom_hline( yintercept = 0, color= "black")+
+
+geom_rect(data = data.frame(Jurisdiction = "Arizona"), 
+              aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+              color = "lightgrey", 
+              fill = "white", 
+              alpha = 0, 
+              linetype = "dotted", 
+              inherit.aes = FALSE)+
+  geom_rect(data = data.frame(Jurisdiction = "California"), 
+            aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+            color = "lightgrey", 
+            fill = "white", 
+            alpha = 0, 
+            linetype = "dotted", 
+            inherit.aes = FALSE)+
+   geom_rect(data = data.frame(Jurisdiction = "Colorado"), 
+             aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+             color = "lightgrey", 
+             fill = "white", 
+             alpha = 0, 
+             linetype = "dotted", 
+             inherit.aes = FALSE)+
+  geom_rect(data = data.frame(Jurisdiction = "Delaware"), 
+            aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+            color = "lightgrey", fill = "white", 
+            alpha = 0, 
+            linetype = "dotted", 
+            inherit.aes = FALSE)+
+  geom_rect(data = data.frame(Jurisdiction = "Florida"), 
+            aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+            color = "lightgrey", 
+            fill = "white", 
+            alpha = 0, 
+            linetype = "dotted", inherit.aes = FALSE)+
+  geom_rect(data = data.frame(Jurisdiction = "Georgia"), 
+            aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+            color = "lightgrey", 
+            fill = "white", 
+            alpha = 0, 
+            linetype = "dotted", 
+            inherit.aes = FALSE)+
+  geom_rect(data = data.frame(Jurisdiction = "Illinois"), 
+            aes(xmin = 4.5, xmax= 5.5, ymin= -Inf, ymax = Inf), 
+            color = "lightgrey", 
+            fill = "white", 
+            alpha = 0, 
+            linetype = "dotted", 
+            inherit.aes = FALSE)+
+  
+  facet_wrap(~Jurisdiction, scales = "free_y")+
+
+  scale_fill_identity(guide= FALSE)+
+  scale_x_discrete(limits=c("Jan", "Feb", "Mar", "Apr", "May"), 
+                   breaks=c("Jan","May"))+
+  scale_y_continuous(labels = label_number_si(a =! 0), n.breaks = 4)+
+
+  labs(
+        x="",
+        y="",
+      title = "Voter registration dropped dramatically during the pandemic",
+      subtitle = "Difference in the number of newly registered voters for each month in 2020 compared to the same month in 2016",
+      caption = "Some states treat voters who move between counties within a state as new registrants because they're unregistered from their old county and nearly registered in the new ones.          ",
+      
+      tag= "FiveThirtyEight") +
+
+    theme_classic()+
+    theme(
+          axis.line.y=element_blank(),
+          axis.line.x = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.y = element_text(size = 6.5, color = "gray"), 
+          axis.text.x = element_text(size= 6.5, color = "gray"),
+          
+          
+          plot.title = element_text(size =9, face = "bold", hjust = 0.55),
+          plot.title.position = "plot",
+          plot.subtitle= element_text(size = 8, hjust = 0.55),
+          
+          plot.caption = element_text(hjust = 0, size = 6, color = "grey50",
+                                      margin = margin(r=5)),
+          plot.background = element_rect(fill= "white"),
+          plot.tag.position = "bottom",
+          plot.tag = element_text(size= 5, color = "gray", hjust =0.1, 
+                                  margin=margin(t=1, 
+                                                r=5, 
+                                                b=1, 
+                                                l=20, 
+                                                unit="pt")),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.major.y = element_line(size= 0.1, color= "lightgrey",
+                                            linetype= "solid"),
+          panel.background = element_rect(fill = "white"),
+          panel.border = element_blank(),
+          panel.spacing = unit(1, "lines"),
+          
+          strip.background= element_rect(fill= "white", linetype = "blank"),
+          strip.text = element_text(color= "black", face= "bold"),
+          strip.text.x = element_text(face = "bold", size= 7),
+
+          
+          legend.title = element_blank(),
+          legend.position = "none"
+    
+)
+
+```

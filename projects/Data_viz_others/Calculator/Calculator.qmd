@@ -17,10 +17,7 @@ categories: [html, JavaScript]
 
 ### Building a Calculator in HTML
 
-
-<div style="border: 1px solid #ccc; padding: 10px;">
-<iframe src="https://raw.githubusercontent.com/karolo89/WEBKOE/main/docs/projects/Data_viz_others/Calculator/Calculator.html" style="width: 100%; height: 400px;"></iframe>
-</div>
+    <iframe src="https://raw.githubusercontent.com/karolo89/WEBKOE/main/projects/Data_viz_others/Calculator/calculator.Rhtml" style="width: 100%; height: 400px;"></iframe>
 
 
 In this article, we will explore how to create a simple business calculator using HTML. The calculator will provide basic arithmetic operations such as addition, subtraction, multiplication, division, and modulus.
@@ -43,7 +40,7 @@ We have a basic HTML structure with a <head> section for the title and CSS style
 
 #### Calculator Layout and Styles
 
-To create an appealing calculator interface, we'll define CSS styles that will be applied to the calculator elements. Here's the CSS code:
+These CSS styles define the formatting for various elements of the calculator interface. The body style specifies the font family, text alignment, and background color for the entire document. The .calculator class defines the appearance of the calculator container, including its width, margin, border, border radius, background color, padding, and box shadow. The h1 style sets the color, font size, and margin bottom for the heading element. The input[type="text"] style applies to text input fields and sets their width, margin bottom, padding, and font size.
 
 ```{.sourceCode .html}
 
@@ -127,11 +124,13 @@ To create an appealing calculator interface, we'll define CSS styles that will b
 
 ```
 
-The CSS styles include formatting for the calculator's body, calculator container, heading, input field, buttons, and their different states (e.g., hover, operation, equal, and clear).
+The .btn-row class ensures that the button rows are displayed as flex containers with space between the buttons. The .btn class defines the common styles for buttons, such as width, padding, margin bottom, font size, border radius, background color, cursor, and transition effects. The .btn:hover style changes the background color of buttons when hovered over. The .btn.operation class targets operation buttons specifically and sets a different background color and text color for them. The .btn.operation:hover style applies a different background color to operation buttons when hovered over.
+
+Similarly, the .btn.equal and .btn.clear classes define styles for the equal and clear buttons, respectively, including their background color and text color. The corresponding :hover styles change the background color of these buttons when hovered over.
 
 #### Calculator Content
 
-Inside the calculator <div>, we'll include the calculator's content, which consists of the heading, input field for displaying the result, and buttons for user interaction. Here's the code:
+Inside the calculator, we'll include the calculator's content, which consists of the heading, input field for displaying the result, and buttons for user interaction. Here's the code:
 
 ```{.sourceCode .html}
 

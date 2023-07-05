@@ -10,7 +10,7 @@
       "*/*.qmd"
     ],
     "projects\\portfolio.qmd": [
-      "{Business,Data_viz_others}/*/index.qmd"
+      "{Business,Data_viz_others}/*/*.qmd"
     ]
   }
 }

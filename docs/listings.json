@@ -22,6 +22,11 @@
   },
   {
     "listing": "/projects/portfolio.html",
-    "items": []
+    "items": [
+      "/projects/Business/MarketSegmentation/segmentation.html",
+      "/projects/Data_viz_others/ChildMortality/mortality.html",
+      "/projects/Business/BrandPerception/brand.html",
+      "/projects/Business/Churners/churners.html"
+    ]
   }
 ]

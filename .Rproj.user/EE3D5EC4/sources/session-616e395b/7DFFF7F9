@@ -3,7 +3,7 @@
     "path": "C:/Users/karol/Desktop/Projects/WEBKOE/_quarto.yml",
     "project_path": "_quarto.yml",
     "type": "yaml",
-    "hash": "3019981257",
+    "hash": "776612237",
     "contents": "",
     "dirty": false,
     "created": 1688096125415.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "14,40",
+        "cursorPosition": "12,14",
         "scrollLine": "6"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688537195,
+    "lastKnownWriteTime": 1688538256,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688537195029,
+    "last_content_update": 1688538256542,
     "read_only": false,
     "read_only_alternatives": []
 }

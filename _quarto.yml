@@ -11,8 +11,6 @@ website:
         file: index.qmd
       - text: "Projects"
         menu: 
-          - text: All Projects
-            href: projects/portfolio.qmd
           - text: Business
             href: projects/Business/index.qmd
           - text: Data Viz

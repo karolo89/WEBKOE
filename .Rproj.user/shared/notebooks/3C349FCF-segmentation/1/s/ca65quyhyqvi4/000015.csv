@@ -1,5 +1,0 @@
-"0","Optimal_Clusters_KMeans(customer_data %>% "
-"0","               select(""Age"", ""AnnualIncome"", ""SpendingScore""),"
-"0","               max_clusters = 10, plot_clusters = T, criterion = 'silhouette')"
-"1","NULL
-"

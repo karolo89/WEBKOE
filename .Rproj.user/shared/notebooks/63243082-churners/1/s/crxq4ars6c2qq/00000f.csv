@@ -1,6 +1,0 @@
-"0","#choosing ""old_spenders"" and ""young_spenders"" to be 2 of the 5 total features in the model: "
-"0","prc2 = prc%>% select(young_spenders,old_spenders) "
-"0",""
-"0","#combining these features with rest of bank ds, then grabbing best variables: "
-"0","banksy = cbind(prc2, bank3) %>% "
-"0","            select(young_spenders, old_spenders,total_trans_ct,total_trans_amt,total_revolving_bal, churn)"

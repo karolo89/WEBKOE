@@ -74,5 +74,11 @@
   },
   "projects/ChildMortality/mortality.qmd": {
     "mortality.html": "537f74af"
+  },
+  "projects/portfolio.qmd": {
+    "portfolio.html": "da6cfbff"
+  },
+  "projects/Business/index.qmd": {
+    "index.html": "2ef7a1b0"
   }
 }

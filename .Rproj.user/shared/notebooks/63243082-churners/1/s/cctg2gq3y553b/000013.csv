@@ -1,2 +1,0 @@
-"0","traindown = downSample(x = train[,-6], y= train$churn) %>% mutate(churn = Class) %>% select(-Class)"
-"0","traindown %>% group_by(churn) %>% count()"

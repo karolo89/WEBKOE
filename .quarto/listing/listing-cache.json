@@ -2,9 +2,6 @@
   "listingMap": {
     "blog.qmd": [
       "blog"
-    ],
-    "portfolio.qmd": [
-      "projects"
     ]
   }
 }

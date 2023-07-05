@@ -1,0 +1,62 @@
+---
+title: "My Scroller Page"
+output:
+  quarto::quarto_html:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    code_external: true
+    self_contained: false
+    css: scrollerstyles.css
+---
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.page:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+.page:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+
+<section class="page">
+  <h1>Page 1</h1>
+  <p>This is the content of the first page.</p>
+</section>
+
+<section class="page">
+  <h1>Page 2</h1>
+  <p>This is the content of the second page.</p>
+</section>
+
+<section class="page">
+  <h1>Page 3</h1>
+  <p>This is the content of the third page.</p>
+</section>
+
+<script>
+window.addEventListener('wheel', function (event) {
+  if (event.deltaY > 0) {
+    window.scrollBy(0, window.innerHeight);
+  } else {
+    window.scrollBy(0, -window.innerHeight);
+  }
+  event.preventDefault();
+});
+</script>

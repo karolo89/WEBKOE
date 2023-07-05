@@ -1,0 +1,15 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  scroll-snap-align: start;
+}

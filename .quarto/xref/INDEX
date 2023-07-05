@@ -107,5 +107,8 @@
   },
   "projects/Data_viz_others/VoteRegistration/vote.qmd": {
     "vote.html": "755795f6"
+  },
+  "TriMet Capstone/scroller.qmd": {
+    "scroller.html": "01b70d1d"
   }
 }

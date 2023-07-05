@@ -306,5 +306,40 @@
     "title": "Curriculum Vitae",
     "section": "",
     "text": "Download current CV"
+  },
+  {
+    "objectID": "TriMet Capstone/scroller.html",
+    "href": "TriMet Capstone/scroller.html",
+    "title": "My Scroller Page",
+    "section": "",
+    "text": "Page 1\n\n\nThis is the content of the first page.\n\n\n\n\nPage 2\n\n\nThis is the content of the second page.\n\n\n\n\nPage 3\n\n\nThis is the content of the third page."
+  },
+  {
+    "objectID": "TriMet Capstone/scroller.html#subsection-2.1",
+    "href": "TriMet Capstone/scroller.html#subsection-2.1",
+    "title": "My Scroller Page",
+    "section": "Subsection 2.1",
+    "text": "Subsection 2.1\nThis is a subsection within the second section."
+  },
+  {
+    "objectID": "TriMet Capstone/scroller.html#subsection-2.2",
+    "href": "TriMet Capstone/scroller.html#subsection-2.2",
+    "title": "My Scroller Page",
+    "section": "Subsection 2.2",
+    "text": "Subsection 2.2\nThis is another subsection within the second section."
+  },
+  {
+    "objectID": "TriMet Capstone/scroller.html#subsection-3.1",
+    "href": "TriMet Capstone/scroller.html#subsection-3.1",
+    "title": "My Scroller Page",
+    "section": "Subsection 3.1",
+    "text": "Subsection 3.1\nThis is a subsection within the third section."
+  },
+  {
+    "objectID": "TriMet Capstone/scroller.html#subsection-3.2",
+    "href": "TriMet Capstone/scroller.html#subsection-3.2",
+    "title": "My Scroller Page",
+    "section": "Subsection 3.2",
+    "text": "Subsection 3.2\nThis is another subsection within the third section."
   }
 ]

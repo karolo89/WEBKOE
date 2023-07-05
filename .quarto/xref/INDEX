@@ -80,5 +80,20 @@
   },
   "projects/Business/index.qmd": {
     "index.html": "2ef7a1b0"
+  },
+  "projects/Business/BrandPerception/brand.qmd": {
+    "brand.html": "147b8a1f"
+  },
+  "projects/Business/Churners/churners.qmd": {
+    "churners.html": "00d386cc"
+  },
+  "projects/Business/MarketSegmentation/segmentation.qmd": {
+    "segmentation.html": "93b23eaf"
+  },
+  "projects/Data_viz_others/ChildMortality/mortality.qmd": {
+    "mortality.html": "b78d45a7"
+  },
+  "projects/Data_viz_others/index.qmd": {
+    "index.html": "e73ee68d"
   }
 }

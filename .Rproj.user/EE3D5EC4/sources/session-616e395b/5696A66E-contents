@@ -64,7 +64,7 @@ library(ggeasy)
 ```
 
 ```{r}
-tweets <- read.csv("https://raw.githubusercontent.com/karolo89/WEBKOE/main/SatisfactionAnalysis/Tweets.csv")%>%
+tweets <- read.csv("https://raw.githubusercontent.com/karolo89/WEBKOE/main/projects/Business/BrandPerception/Tweets.csv")%>%
   select(-negativereason_confidence)
 
 head(tweets)

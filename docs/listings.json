@@ -1,0 +1,27 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/blog/facebook/facebook.html",
+      "/blog/Theranos/theranos.html"
+    ]
+  },
+  {
+    "listing": "/projects/Business/index.html",
+    "items": [
+      "/projects/Business/MarketSegmentation/segmentation.html",
+      "/projects/Business/BrandPerception/brand.html",
+      "/projects/Business/Churners/churners.html"
+    ]
+  },
+  {
+    "listing": "/projects/Data_viz_others/index.html",
+    "items": [
+      "/projects/Data_viz_others/ChildMortality/mortality.html"
+    ]
+  },
+  {
+    "listing": "/projects/portfolio.html",
+    "items": []
+  }
+]

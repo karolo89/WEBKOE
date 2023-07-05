@@ -1,6 +1,0 @@
-[2,"\n"]
-[1,"pandoc \n  to: html\n  output-file: portfolio.html\n  standalone: true\n  title-prefix: Karol M. Orozco\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  \nmetadata\n  document-css: false\n  link-citations: true\n  lang: en\n  editor: visual\n  citations-hover: true\n  footnotes-hover: true\n  theme:\n    light: ../LightTheme.css\n    dark: DarkTheme.scss\n  code-copy: true\n  title-block-banner: true\n  title: Portfolio\n  listing:\n    - id: projects\n      contents: '{Business,Data_viz_others}/*/*.qmd'\n      sort: date desc\n  type: default\n  date-format: long\n  fields:\n    - image\n    - date\n    - title\n    - author\n    - description\n    - categories\n    - reading-time\n  sort-ui: false\n  filter-ui: false\n  page-layout: article\n  \n"]
-[1,"Output created: ..\\docs\\projects\\portfolio.html\n\nPreparing to preview\n"]
-[1,"\n"]
-[1,"Watching files for changes\nBrowse at http://localhost:3030/projects/portfolio.html\n"]
-[1,"GET: /projects/portfolio.html\n"]

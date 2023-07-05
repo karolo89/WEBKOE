@@ -17,12 +17,14 @@
   {
     "listing": "/projects/Data_viz_others/index.html",
     "items": [
+      "/projects/Data_viz_others/Calculator/Calculator.html",
       "/projects/Data_viz_others/ChildMortality/mortality.html"
     ]
   },
   {
     "listing": "/projects/portfolio.html",
     "items": [
+      "/projects/Data_viz_others/Calculator/Calculator.html",
       "/projects/Business/MarketSegmentation/segmentation.html",
       "/projects/Data_viz_others/ChildMortality/mortality.html",
       "/projects/Business/BrandPerception/brand.html",

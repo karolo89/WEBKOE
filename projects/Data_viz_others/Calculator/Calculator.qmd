@@ -1,0 +1,330 @@
+---
+title: "Crunching Numbers with Style: Building a Sleek Calculator in HTML"
+author: "Orozco Karol M."
+date: "07-04-2023"
+image: calculator.jpg
+format:
+  html:
+    toc: true
+    toc-location: right
+    html-math-method: katex
+    page-layout: full
+execute: 
+  warning: false
+  message: false
+categories: [html, JavaScript]
+---
+
+### Building a Calculator in HTML
+
+In this article, we will explore how to create a simple business calculator using HTML. The calculator will provide basic arithmetic operations such as addition, subtraction, multiplication, division, and modulus.
+
+#### HTML Structure
+
+First, let's take a look at the HTML structure of our business calculator:
+
+```{.sourceCode .html}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+ 
+```
+
+
+We have a basic HTML structure with a <head> section for the title and CSS styles, and a <body> section that contains the calculator's content and JavaScript logic.
+
+#### Calculator Layout and Styles
+
+To create an appealing calculator interface, we'll define CSS styles that will be applied to the calculator elements. Here's the CSS code:
+
+```{.sourceCode .html}
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f7f7;
+    }
+
+    .calculator {
+      width: 300px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 20px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      width: 23%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      background-color: #eee;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ddd;
+    }
+
+    .btn.operation {
+      background-color: #337ab7;
+      color: #fff;
+    }
+
+    .btn.operation:hover {
+      background-color: #23527c;
+    }
+
+    .btn.equal {
+      background-color: #5cb85c;
+      color: #fff;
+    }
+
+    .btn.equal:hover {
+      background-color: #449d44;
+    }
+
+    .btn.clear {
+      background-color: #d9534f;
+      color: #fff;
+    }
+
+    .btn.clear:hover {
+      background-color: #c9302c;
+    }
+  </style>
+
+```
+
+The CSS styles include formatting for the calculator's body, calculator container, heading, input field, buttons, and their different states (e.g., hover, operation, equal, and clear).
+
+#### Calculator Content
+
+Inside the calculator <div>, we'll include the calculator's content, which consists of the heading, input field for displaying the result, and buttons for user interaction. Here's the code:
+
+```{.sourceCode .html}
+
+  <div class="calculator">
+    <h1>Business Calculator</h1>
+    <input type="text" id="result" readonly>
+    <div class="btn-row">
+      <input type="button" class="btn clear" value="Clear" onclick="clearResult()">
+      <input type="button" class="btn operation" value="/" onclick="appendToResult('/')">
+      <input type="button" class="btn operation" value="*" onclick="appendToResult('*')">
+      <input type="button" class="btn operation" value="-" onclick="appendToResult('-')">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="7" onclick="appendToResult('7')">
+      <input type="button" class="btn" value="8" onclick="appendToResult('8')">
+      <input type="button" class="btn" value="9" onclick="appendToResult('9')">
+      <input type="button" class="btn operation" value="+" onclick="appendToResult('+')">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="4" onclick="appendToResult('4')">
+      <input type="button" class="btn" value="5" onclick="appendToResult('5')">
+      <input type="button" class="btn" value="6" onclick="appendToResult('6')">
+      <input type="button" class="btn operation" value="%" onclick="appendToResult('%')">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="1" onclick="appendToResult('1')">
+      <input type="button" class="btn" value="2" onclick="appendToResult('2')">
+      <input type="button" class="btn" value="3" onclick="appendToResult('3')">
+      <input type="button" class="btn equal" value="=" onclick="calculateResult()">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="0" onclick="appendToResult('0')">
+      <input type="button" class="btn" value="." onclick="appendToResult('.')">
+    </div>
+  </div>
+```
+
+The calculator content includes the heading "Business Calculator," an input field for displaying the result with the ID "result," and several <div> sections for organizing the rows of buttons. Each button has an assigned value and an onclick attribute that triggers JavaScript functions to perform specific actions.
+
+#### JavaScript Logic
+To enable the calculator's functionality, we need to define JavaScript functions that handle button clicks and perform calculations. Here's the JavaScript code:
+
+```{.sourceCode .html}
+
+  <script>
+    function appendToResult(value) {
+      document.getElementById('result').value += value;
+    }
+
+    function calculateResult() {
+      const result = eval(document.getElementById('result').value);
+      document.getElementById('result').value = result;
+    }
+
+    function clearResult() {
+      document.getElementById('result').value = '';
+    }
+  </script>
+```
+
+The JavaScript functions include appendToResult(value) to append values to the result input field, calculateResult() to evaluate the mathematical expression and update the result, and clearResult() to clear the result input field.
+
+#### Putting It All Together
+By combining the HTML structure, CSS styles, calculator content, and JavaScript logic, we create a fully functional business calculator. Users can input numbers and perform basic arithmetic operations by clicking the corresponding buttons.
+
+The complete code for the business calculator can be found below:
+
+```{.sourceCode .html}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Business Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f7f7;
+    }
+
+    .calculator {
+      width: 300px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 20px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      width: 23%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      background-color: #eee;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ddd;
+    }
+
+    .btn.operation {
+      background-color: #337ab7;
+      color: #fff;
+    }
+
+    .btn.operation:hover {
+      background-color: #23527c;
+    }
+
+    .btn.equal {
+      background-color: #5cb85c;
+      color: #fff;
+    }
+
+    .btn.equal:hover {
+      background-color: #449d44;
+    }
+
+    .btn.clear {
+      background-color: #d9534f;
+      color: #fff;
+    }
+
+    .btn.clear:hover {
+      background-color: #c9302c;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1>Business Calculator</h1>
+    <input type="text" id="result" readonly>
+    <div class="btn-row">
+      <input type="button" class="btn clear" value="Clear" onclick="clearResult()">
+      <input type="button" class="btn operation" value="/" onclick="appendToResult('/')">
+      <input type="button" class="btn operation" value="*" onclick="appendToResult('*')">
+      <input type="button" class="btn operation" value="-" onclick="appendToResult('-')">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="7" onclick="appendToResult('7')">
+      <input type="button" class="btn" value="8" onclick="appendToResult('8')">
+      <input type="button" class="btn" value="9" onclick="appendToResult('9')">
+      <input type="button" class="btn operation" value="+" onclick="appendToResult('+')">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="4" onclick="appendToResult('4')">
+      <input type="button" class="btn" value="5" onclick="appendToResult('5')">
+      <input type="button" class="btn" value="6" onclick="appendToResult('6')">
+      <input type="button" class="btn operation" value="%" onclick="appendToResult('%')">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="1" onclick="appendToResult('1')">
+      <input type="button" class="btn" value="2" onclick="appendToResult('2')">
+      <input type="button" class="btn" value="3" onclick="appendToResult('3')">
+      <input type="button" class="btn equal" value="=" onclick="calculateResult()">
+    </div>
+    <div class="btn-row">
+      <input type="button" class="btn" value="0" onclick="appendToResult('0')">
+      <input type="button" class="btn" value="." onclick="appendToResult('.')">
+    </div>
+  </div>
+
+  <script>
+    function appendToResult(value) {
+      document.getElementById('result').value += value;
+    }
+
+    function calculateResult() {
+      const result = eval(document.getElementById('result').value);
+      document.getElementById('result').value = result;
+    }
+
+    function clearResult() {
+      document.getElementById('result').value = '';
+    }
+  </script>
+</body>
+</html>
+
+```

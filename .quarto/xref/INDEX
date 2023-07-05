@@ -95,5 +95,8 @@
   },
   "projects/Data_viz_others/index.qmd": {
     "index.html": "e73ee68d"
+  },
+  "projects/Data_viz_others/Calculator/Calculator.qmd": {
+    "Calculator.html": "18e4597d"
   }
 }

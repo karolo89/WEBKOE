@@ -104,5 +104,8 @@
   },
   "projects/Data_viz_others/vote/vote.qmd": {
     "vote.html": "5565727a"
+  },
+  "projects/Data_viz_others/VoteRegistration/vote.qmd": {
+    "vote.html": "755795f6"
   }
 }

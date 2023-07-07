@@ -27,7 +27,7 @@ In this article, we will explore how to create a simple calculator using HTML. T
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
+      text-align: left;
       background-color: #f7f7f7;
     }
 

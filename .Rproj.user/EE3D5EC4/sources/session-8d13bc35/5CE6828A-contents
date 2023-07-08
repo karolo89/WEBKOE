@@ -1,5 +1,5 @@
 ---
-title: "Tables"
+title: "Unlocking Insights with Tables: Exploring the Palmer Penguins Dataset"
 author: "Karol Orozco"
 date: 02/06/2023
 image: featured.png
@@ -7,7 +7,11 @@ image: featured.png
 
 # Meet the Palmer penguins
 
+In this article, we explore the use of tables in data analysis and visualization. We will be working with the Palmer penguins dataset, which provides information about penguin species, their characteristics, and measurements.
+
 ![Palmer penguins](featured.png) The Palmer Archipelago penguins. Artwork by @allison_horst.
+
+First, we start by preparing the data, ensuring that any missing values are removed. We create two tables: table_count, which displays the count of penguins by species and sex, and df, which calculates the mean measurements for each species and sex.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
@@ -48,6 +52,8 @@ table<- table%>%
 
 ## Riding Tables with DT
 
+Next, we utilize the DT package to create an interactive datatable. The table includes options for selecting rows, columns, or individual cells, providing an intuitive way to explore the data. Additionally, we add a caption to the table, acknowledging the data source.
+
 ```{r}
 library(DT)
 
@@ -69,6 +75,8 @@ extensions = c('Select', 'Buttons'), options = list(
 ```
 
 ## Riding Tables with gt & gtExtra
+
+We then introduce another approach using the gt and gtExtras packages. With gt, we create a stylish table that groups the data by penguin species. We customize the table's appearance, adding headers, footnotes, and source notes. The table is visually enhanced with different row colors representing each penguin species.
 
 Great Resource: [Modify the table output options](https://gt.rstudio.com/reference/tab_options.html)
 
@@ -158,6 +166,8 @@ tab_footnote(
 
 ### Adding Images
 
+To further enrich the table, we include images of the penguin species using the gtExtras package. Each penguin species is associated with its representative image, providing a visual representation alongside the data. The resulting table is visually appealing and informative.
+
 ```{r}
 df3 <- penguins%>%
   group_by(species) %>% 
@@ -206,6 +216,8 @@ df3 %>%
     heading.border.bottom.width = "5px")
  
 ```
+
+In conclusion, tables are a powerful tool for presenting and analyzing data. By utilizing packages such as DT, gt, and gtExtras, we can create interactive and visually appealing tables that enhance the understanding of complex datasets.
 
 ## Reference
 

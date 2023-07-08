@@ -179,9 +179,9 @@ df3 <- penguins%>%
          Body_Mass= body_mass_g,
          Penguin= species)%>%
   mutate(Photo = case_when(
-    str_detect(Penguin,'Adelie') ~ "https://github.com/karolo89/karolo_website/blob/main/viz/Table/adellie.png?raw=true", 
-    str_detect(Penguin,'Chinstrap') ~ "https://github.com/karolo89/karolo_website/blob/main/viz/Table/chinstrap.png?raw=true",
-    str_detect(Penguin,'Gentoo') ~ "https://github.com/karolo89/karolo_website/blob/main/viz/Table/gentoo.png?raw=true"))%>%
+    str_detect(Penguin,'Adelie') ~ "https://raw.githubusercontent.com/karolo89/WEBKOE/main/projects/Data_viz_others/Table/adellie.png", 
+    str_detect(Penguin,'Chinstrap') ~ "https://raw.githubusercontent.com/karolo89/WEBKOE/main/projects/Data_viz_others/Table/chinstrap.png",
+    str_detect(Penguin,'Gentoo') ~ "https://raw.githubusercontent.com/karolo89/WEBKOE/main/projects/Data_viz_others/Table/gentoo.png"))%>%
   
   select("Photo", "Penguin", "Culmen_Length", "Culmen_Depth", "Flipper_Length", "Body_Mass")
 

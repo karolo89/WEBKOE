@@ -2,6 +2,15 @@
   "listingMap": {
     "blog.qmd": [
       "blog"
+    ],
+    "projects\\Business\\index.qmd": [
+      "*/*.qmd"
+    ],
+    "projects\\Data_viz_others\\index.qmd": [
+      "*/*.qmd"
+    ],
+    "projects\\portfolio.qmd": [
+      "{Business,Data_viz_others}/*/*.qmd"
     ]
   }
 }

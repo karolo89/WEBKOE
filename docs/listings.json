@@ -18,6 +18,7 @@
     "listing": "/projects/Data_viz_others/index.html",
     "items": [
       "/projects/Data_viz_others/ChildMortality/mortality.html",
+      "/projects/Data_viz_others/Table/table.html",
       "/projects/Data_viz_others/Hurricanes/hurricane.html",
       "/projects/Data_viz_others/VoteRegistration/vote.html"
     ]
@@ -29,6 +30,7 @@
       "/projects/Data_viz_others/ChildMortality/mortality.html",
       "/projects/Business/BrandPerception/brand.html",
       "/projects/Business/Churners/churners.html",
+      "/projects/Data_viz_others/Table/table.html",
       "/projects/Data_viz_others/Hurricanes/hurricane.html",
       "/projects/Data_viz_others/VoteRegistration/vote.html"
     ]

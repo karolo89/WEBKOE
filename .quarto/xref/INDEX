@@ -126,5 +126,8 @@
   },
   "projects/Business/TriMet Capstone/capstone.qmd": {
     "capstone.html": "9642bbd7"
+  },
+  "projects/Data_viz_others/Table/table.qmd": {
+    "table.html": "64fc678a"
   }
 }

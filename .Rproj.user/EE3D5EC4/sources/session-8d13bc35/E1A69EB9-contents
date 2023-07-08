@@ -1,0 +1,108 @@
+---
+title: "Outbreaks"
+output: html_document
+---
+
+
+<style>
+    /* CSS styles go here */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .main-image {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .main-image img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+    
+    .intro {
+        text-align: justify;
+        margin-bottom: 20px;
+    }
+    
+    .outbreak-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .outbreak-info .outbreak {
+        flex-basis: 48%;
+    }
+    
+    .outbreak-info h2 {
+        font-size: 20px;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    
+    .outbreak-info p {
+        margin: 0;
+    }
+    
+    .footer {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
+    <h1>Measles Outbreaks</h1>
+    
+    <div class="main-image">
+        <img src="path/to/your/image.jpg" alt="Measles Outbreaks Image">
+    </div>
+    
+    <div class="intro">
+        <p>Introduction text goes here...</p>
+    </div>
+    
+    <div class="outbreak-info">
+        <div class="outbreak">
+            <h2>Outbreak 1</h2>
+            <p>Outbreak 1 details go here...</p>
+        </div>
+        
+        <div class="outbreak">
+            <h2>Outbreak 2</h2>
+            <p>Outbreak 2 details go here...</p>
+        </div>
+    </div>
+    
+    <div class="outbreak-info">
+        <div class="outbreak">
+            <h2>Outbreak 3</h2>
+            <p>Outbreak 3 details go here...</p>
+        </div>
+        
+        <div class="outbreak">
+            <h2>Outbreak 4</h2>
+            <p>Outbreak 4 details go here...</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Footer text goes here...</p>
+    </div>
+</div>

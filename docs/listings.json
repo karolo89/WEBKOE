@@ -9,6 +9,7 @@
   {
     "listing": "/projects/Business/index.html",
     "items": [
+      "/projects/Business/TriMet Capstone/capstone.html",
       "/projects/Business/MarketSegmentation/segmentation.html",
       "/projects/Business/BrandPerception/brand.html",
       "/projects/Business/Churners/churners.html"
@@ -26,7 +27,7 @@
   {
     "listing": "/projects/portfolio.html",
     "items": [
-      "/projects/Data_viz_others/Calculator/Calculator.html",
+      "/projects/Business/TriMet Capstone/capstone.html",
       "/projects/Business/MarketSegmentation/segmentation.html",
       "/projects/Data_viz_others/ChildMortality/mortality.html",
       "/projects/Business/BrandPerception/brand.html",

@@ -1,0 +1,18 @@
+{
+  "hash": "e7aa178f60140ea8afd47429d618e54d",
+  "result": {
+    "markdown": "---\ntitle: \"Thinking Big with Maps in R\"\nauthor: \"Silvia Canelón\"\ndate: 2022-11-10T16:00:00\ndate_end: 2022-11-10T16:15:00\npublishDate: 2022-10-05\nslug: thinking-big\ncategories:\n  - R\ntags:\n  - R\n  - geospatial\nevent: CANSSI Ontario Statistical Software Conference\nevent_url: https://canssiontario.utoronto.ca/event/statistical-software-conference/\nlocation: Toronto, ON, Canada (hybrid)\nsubtitle: \"Tips on Wrangling Large Vector Data into Interactive Maps\"\nsummary: \"[CANSSI Ontario Statistical Software Conference](https://canssiontario.utoronto.ca/event/statistical-software-conference/) talk on interactive map-making with large vector data\"\nfeatured: yes\nlinks:\n- icon: images\n  icon_pack: fas\n  name: slides\n  url: https://slides.silviacanelon.com/2022-thinking-big\n- icon: play-circle\n  icon_pack: fas\n  name: video\n  url: https://youtu.be/wiAnmkbgcO8\nformat: hugo\n---\n\n\nThe road to map-making can take some unexpected twists and turns when you scale up an interactive map from hundreds of features to hundreds of thousands. This talk is a story about creative spatial data wrangling, powerful R packages, and a heroic #RStats community.\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/fitvids-2.1.1/fitvids.min.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}
